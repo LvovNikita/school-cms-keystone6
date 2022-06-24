@@ -16,4 +16,30 @@ model User {
   username String  @default("")
   password String?
   email    String  @default("")
+  isAdmin  Boolean @default(false)
+}
+
+model Teacher {
+  id                                String    @id @default(cuid())
+  firstname                         String    @default("")
+  lastname                          String    @default("")
+  middlename                        String    @default("")
+  dateOfBirth                       DateTime?
+  position                          String?
+  subjects                          String?
+  email                             String    @default("")
+  phone                             String    @default("")
+  category                          String?
+  education                         String    @default("")
+  educationLevel                    String?
+  degree                            String?
+  academicTitle                     String?
+  totalYearsExperience              Int?
+  totalYearsExperienceUpdateDate    DateTime?
+  teachingExperienceYears           Int?
+  teachingExperienceYearsUpdateDate DateTime?
+  worksSinceDate                    DateTime?
+  trainings                         String?
+  experience                        String    @default("")
+  additionalInfo                    String    @default("")
 }

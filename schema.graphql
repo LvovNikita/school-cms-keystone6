@@ -6,6 +6,7 @@ type User {
   username: String
   password: PasswordState
   email: String
+  isAdmin: Boolean
 }
 
 type PasswordState {
@@ -24,6 +25,7 @@ input UserWhereInput {
   username: StringFilter
   password: PasswordFilter
   email: StringFilter
+  isAdmin: BooleanFilter
 }
 
 input IDFilter {
@@ -69,10 +71,16 @@ input PasswordFilter {
   isSet: Boolean!
 }
 
+input BooleanFilter {
+  equals: Boolean
+  not: BooleanFilter
+}
+
 input UserOrderByInput {
   id: OrderDirection
   username: OrderDirection
   email: OrderDirection
+  isAdmin: OrderDirection
 }
 
 enum OrderDirection {
@@ -84,6 +92,7 @@ input UserUpdateInput {
   username: String
   password: String
   email: String
+  isAdmin: Boolean
 }
 
 input UserUpdateArgs {
@@ -95,6 +104,191 @@ input UserCreateInput {
   username: String
   password: String
   email: String
+  isAdmin: Boolean
+}
+
+type Teacher {
+  id: ID!
+  firstname: String
+  lastname: String
+  middlename: String
+  dateOfBirth: DateTime
+  position: String
+  subjects: JSON
+  email: String
+  phone: String
+  category: String
+  education: String
+  educationLevel: String
+  degree: String
+  academicTitle: String
+  totalYearsExperience: Int
+  totalYearsExperienceUpdateDate: DateTime
+  teachingExperienceYears: Int
+  teachingExperienceYearsUpdateDate: DateTime
+  worksSinceDate: DateTime
+  trainings: JSON
+  experience: String
+  additionalInfo: String
+}
+
+scalar DateTime
+  @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+input TeacherWhereUniqueInput {
+  id: ID
+}
+
+input TeacherWhereInput {
+  AND: [TeacherWhereInput!]
+  OR: [TeacherWhereInput!]
+  NOT: [TeacherWhereInput!]
+  id: IDFilter
+  firstname: StringFilter
+  lastname: StringFilter
+  middlename: StringFilter
+  dateOfBirth: DateTimeNullableFilter
+  position: StringNullableFilter
+  email: StringFilter
+  phone: StringFilter
+  category: StringNullableFilter
+  education: StringFilter
+  educationLevel: StringNullableFilter
+  degree: StringNullableFilter
+  academicTitle: StringNullableFilter
+  totalYearsExperience: IntNullableFilter
+  totalYearsExperienceUpdateDate: DateTimeNullableFilter
+  teachingExperienceYears: IntNullableFilter
+  teachingExperienceYearsUpdateDate: DateTimeNullableFilter
+  worksSinceDate: DateTimeNullableFilter
+  experience: StringFilter
+  additionalInfo: StringFilter
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: DateTimeNullableFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input TeacherOrderByInput {
+  id: OrderDirection
+  firstname: OrderDirection
+  lastname: OrderDirection
+  middlename: OrderDirection
+  dateOfBirth: OrderDirection
+  position: OrderDirection
+  email: OrderDirection
+  phone: OrderDirection
+  category: OrderDirection
+  education: OrderDirection
+  educationLevel: OrderDirection
+  degree: OrderDirection
+  academicTitle: OrderDirection
+  totalYearsExperience: OrderDirection
+  totalYearsExperienceUpdateDate: OrderDirection
+  teachingExperienceYears: OrderDirection
+  teachingExperienceYearsUpdateDate: OrderDirection
+  worksSinceDate: OrderDirection
+  experience: OrderDirection
+  additionalInfo: OrderDirection
+}
+
+input TeacherUpdateInput {
+  firstname: String
+  lastname: String
+  middlename: String
+  dateOfBirth: DateTime
+  position: String
+  subjects: JSON
+  email: String
+  phone: String
+  category: String
+  education: String
+  educationLevel: String
+  degree: String
+  academicTitle: String
+  totalYearsExperience: Int
+  totalYearsExperienceUpdateDate: DateTime
+  teachingExperienceYears: Int
+  teachingExperienceYearsUpdateDate: DateTime
+  worksSinceDate: DateTime
+  trainings: JSON
+  experience: String
+  additionalInfo: String
+}
+
+input TeacherUpdateArgs {
+  where: TeacherWhereUniqueInput!
+  data: TeacherUpdateInput!
+}
+
+input TeacherCreateInput {
+  firstname: String
+  lastname: String
+  middlename: String
+  dateOfBirth: DateTime
+  position: String
+  subjects: JSON
+  email: String
+  phone: String
+  category: String
+  education: String
+  educationLevel: String
+  degree: String
+  academicTitle: String
+  totalYearsExperience: Int
+  totalYearsExperienceUpdateDate: DateTime
+  teachingExperienceYears: Int
+  teachingExperienceYearsUpdateDate: DateTime
+  worksSinceDate: DateTime
+  trainings: JSON
+  experience: String
+  additionalInfo: String
 }
 
 """
@@ -112,6 +306,15 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
+  createTeacher(data: TeacherCreateInput!): Teacher
+  createTeachers(data: [TeacherCreateInput!]!): [Teacher]
+  updateTeacher(
+    where: TeacherWhereUniqueInput!
+    data: TeacherUpdateInput!
+  ): Teacher
+  updateTeachers(data: [TeacherUpdateArgs!]!): [Teacher]
+  deleteTeacher(where: TeacherWhereUniqueInput!): Teacher
+  deleteTeachers(where: [TeacherWhereUniqueInput!]!): [Teacher]
 }
 
 type Query {
@@ -123,6 +326,14 @@ type Query {
   ): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
+  teachers(
+    where: TeacherWhereInput! = {}
+    orderBy: [TeacherOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Teacher!]
+  teacher(where: TeacherWhereUniqueInput!): Teacher
+  teachersCount(where: TeacherWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 
