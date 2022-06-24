@@ -11,6 +11,61 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
+model Info {
+  id                               String    @id @default(cuid())
+  schoolName                       String    @default("")
+  schoolNameAbbr                   String    @default("")
+  director                         Teacher?  @relation("Info_director", fields: [directorId], references: [id])
+  directorId                       String?   @map("director")
+  address                          String    @default("")
+  website                          String    @default("")
+  email                            String    @default("")
+  phone                            String    @default("")
+  fax                              String    @default("")
+  schedule                         String    @default("")
+  founder                          String    @default("")
+  founderAddress                   String    @default("")
+  founderWebSite                   String    @default("")
+  founderEmail                     String    @default("")
+  founderPhone                     String    @default("")
+  hasPreSchoolEducationLevel       Boolean   @default(false)
+  hasPrimarySchoolEducationLevel   Boolean   @default(false)
+  hasSecondarySchoolEducationLevel Boolean   @default(false)
+  OGRN                             Int?
+  INN                              Int?
+  INNStartDate                     DateTime?
+  KPP                              Int?
+  OKOPF                            String    @default("")
+  OKFS                             String    @default("")
+  licenseNumber                    Int?
+  licenseStartDate                 DateTime?
+  isLicensePermanent               Boolean   @default(false)
+  licenseEndDate                   DateTime?
+  accreditationRegNumber           String    @default("")
+  accreditationSerialNumber        String    @default("")
+  accreditationStartDate           DateTime?
+  accreditationEndDate             DateTime?
+  numOfFirstGrades                 Int?
+  numOfSecondGrades                Int?
+  numOfThirdGrades                 Int?
+  numOfFourthGrades                Int?
+  numOfFifthrades                  Int?
+  numOfSixthGrades                 Int?
+  numOfSeventhGrades               Int?
+  numOfEighthGrades                Int?
+  numOfNenethGrades                Int?
+  numOfTenthGrades                 Int?
+  numOfEleventhGrades              Int?
+  numOfElementarySchoolPupils      Int?
+  numOfMiddleSchoolPupils          Int?
+  numOfHighSchoolPupils            Int?
+  gradeOneVacantPlaces             Int?
+  gradeFiveVacantPlaces            Int?
+  vacantPlacesUpdateDate           DateTime?
+
+  @@index([directorId])
+}
+
 model User {
   id       String  @id @default(cuid())
   username String  @default("")
@@ -42,6 +97,7 @@ model Teacher {
   trainings                         String?
   experience                        String    @default("")
   additionalInfo                    String    @default("")
+  from_Info_director                Info[]    @relation("Info_director")
 }
 
 model MenuItem {
