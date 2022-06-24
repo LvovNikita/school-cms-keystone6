@@ -426,6 +426,13 @@ type Page {
   id: ID!
   title: String
   menuItemRef: MenuItem
+  blocks(
+    where: BlockWhereInput! = {}
+    orderBy: [BlockOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Block!]
+  blocksCount(where: BlockWhereInput! = {}): Int
 }
 
 input PageWhereUniqueInput {
@@ -439,6 +446,13 @@ input PageWhereInput {
   id: IDFilter
   title: StringFilter
   menuItemRef: MenuItemWhereInput
+  blocks: BlockManyRelationFilter
+}
+
+input BlockManyRelationFilter {
+  every: BlockWhereInput
+  some: BlockWhereInput
+  none: BlockWhereInput
 }
 
 input PageOrderByInput {
@@ -449,12 +463,20 @@ input PageOrderByInput {
 input PageUpdateInput {
   title: String
   menuItemRef: MenuItemRelateToOneForUpdateInput
+  blocks: BlockRelateToManyForUpdateInput
 }
 
 input MenuItemRelateToOneForUpdateInput {
   create: MenuItemCreateInput
   connect: MenuItemWhereUniqueInput
   disconnect: Boolean
+}
+
+input BlockRelateToManyForUpdateInput {
+  disconnect: [BlockWhereUniqueInput!]
+  set: [BlockWhereUniqueInput!]
+  create: [BlockCreateInput!]
+  connect: [BlockWhereUniqueInput!]
 }
 
 input PageUpdateArgs {
@@ -465,11 +487,59 @@ input PageUpdateArgs {
 input PageCreateInput {
   title: String
   menuItemRef: MenuItemRelateToOneForCreateInput
+  blocks: BlockRelateToManyForCreateInput
 }
 
 input MenuItemRelateToOneForCreateInput {
   create: MenuItemCreateInput
   connect: MenuItemWhereUniqueInput
+}
+
+input BlockRelateToManyForCreateInput {
+  create: [BlockCreateInput!]
+  connect: [BlockWhereUniqueInput!]
+}
+
+type Block {
+  id: ID!
+  title: String
+  content: Block_content_Document
+}
+
+type Block_content_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input BlockWhereUniqueInput {
+  id: ID
+}
+
+input BlockWhereInput {
+  AND: [BlockWhereInput!]
+  OR: [BlockWhereInput!]
+  NOT: [BlockWhereInput!]
+  id: IDFilter
+  title: StringFilter
+}
+
+input BlockOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+}
+
+input BlockUpdateInput {
+  title: String
+  content: JSON
+}
+
+input BlockUpdateArgs {
+  where: BlockWhereUniqueInput!
+  data: BlockUpdateInput!
+}
+
+input BlockCreateInput {
+  title: String
+  content: JSON
 }
 
 type NewsPost {
@@ -558,6 +628,12 @@ type Mutation {
   updatePages(data: [PageUpdateArgs!]!): [Page]
   deletePage(where: PageWhereUniqueInput!): Page
   deletePages(where: [PageWhereUniqueInput!]!): [Page]
+  createBlock(data: BlockCreateInput!): Block
+  createBlocks(data: [BlockCreateInput!]!): [Block]
+  updateBlock(where: BlockWhereUniqueInput!, data: BlockUpdateInput!): Block
+  updateBlocks(data: [BlockUpdateArgs!]!): [Block]
+  deleteBlock(where: BlockWhereUniqueInput!): Block
+  deleteBlocks(where: [BlockWhereUniqueInput!]!): [Block]
   createNewsPost(data: NewsPostCreateInput!): NewsPost
   createNewsPosts(data: [NewsPostCreateInput!]!): [NewsPost]
   updateNewsPost(
@@ -602,6 +678,14 @@ type Query {
   ): [Page!]
   page(where: PageWhereUniqueInput!): Page
   pagesCount(where: PageWhereInput! = {}): Int
+  blocks(
+    where: BlockWhereInput! = {}
+    orderBy: [BlockOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Block!]
+  block(where: BlockWhereUniqueInput!): Block
+  blocksCount(where: BlockWhereInput! = {}): Int
   newsPosts(
     where: NewsPostWhereInput! = {}
     orderBy: [NewsPostOrderByInput!]! = []

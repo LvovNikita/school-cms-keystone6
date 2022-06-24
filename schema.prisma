@@ -60,6 +60,14 @@ model Page {
   id          String    @id @default(cuid())
   title       String    @default("")
   menuItemRef MenuItem? @relation("MenuItem_pageRef")
+  blocks      Block[]   @relation("Page_blocks")
+}
+
+model Block {
+  id               String @id @default(cuid())
+  title            String @default("")
+  content          String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  from_Page_blocks Page[] @relation("Page_blocks")
 }
 
 model NewsPost {
