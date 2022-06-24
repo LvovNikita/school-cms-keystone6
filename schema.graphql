@@ -291,6 +291,84 @@ input TeacherCreateInput {
   additionalInfo: String
 }
 
+type MenuItem {
+  id: ID!
+  title: String
+  weigth: Int
+  subItems(
+    where: MenuItemWhereInput! = {}
+    orderBy: [MenuItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [MenuItem!]
+  subItemsCount(where: MenuItemWhereInput! = {}): Int
+  slug: String
+  isTopLevel: Boolean
+}
+
+input MenuItemWhereUniqueInput {
+  id: ID
+}
+
+input MenuItemWhereInput {
+  AND: [MenuItemWhereInput!]
+  OR: [MenuItemWhereInput!]
+  NOT: [MenuItemWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  weigth: IntNullableFilter
+  subItems: MenuItemManyRelationFilter
+  slug: StringFilter
+  isTopLevel: BooleanFilter
+}
+
+input MenuItemManyRelationFilter {
+  every: MenuItemWhereInput
+  some: MenuItemWhereInput
+  none: MenuItemWhereInput
+}
+
+input MenuItemOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  weigth: OrderDirection
+  slug: OrderDirection
+  isTopLevel: OrderDirection
+}
+
+input MenuItemUpdateInput {
+  title: String
+  weigth: Int
+  subItems: MenuItemRelateToManyForUpdateInput
+  slug: String
+  isTopLevel: Boolean
+}
+
+input MenuItemRelateToManyForUpdateInput {
+  disconnect: [MenuItemWhereUniqueInput!]
+  set: [MenuItemWhereUniqueInput!]
+  create: [MenuItemCreateInput!]
+  connect: [MenuItemWhereUniqueInput!]
+}
+
+input MenuItemUpdateArgs {
+  where: MenuItemWhereUniqueInput!
+  data: MenuItemUpdateInput!
+}
+
+input MenuItemCreateInput {
+  title: String
+  weigth: Int
+  subItems: MenuItemRelateToManyForCreateInput
+  slug: String
+  isTopLevel: Boolean
+}
+
+input MenuItemRelateToManyForCreateInput {
+  create: [MenuItemCreateInput!]
+  connect: [MenuItemWhereUniqueInput!]
+}
+
 type NewsPost {
   id: ID!
   title: String
@@ -362,6 +440,15 @@ type Mutation {
   updateTeachers(data: [TeacherUpdateArgs!]!): [Teacher]
   deleteTeacher(where: TeacherWhereUniqueInput!): Teacher
   deleteTeachers(where: [TeacherWhereUniqueInput!]!): [Teacher]
+  createMenuItem(data: MenuItemCreateInput!): MenuItem
+  createMenuItems(data: [MenuItemCreateInput!]!): [MenuItem]
+  updateMenuItem(
+    where: MenuItemWhereUniqueInput!
+    data: MenuItemUpdateInput!
+  ): MenuItem
+  updateMenuItems(data: [MenuItemUpdateArgs!]!): [MenuItem]
+  deleteMenuItem(where: MenuItemWhereUniqueInput!): MenuItem
+  deleteMenuItems(where: [MenuItemWhereUniqueInput!]!): [MenuItem]
   createNewsPost(data: NewsPostCreateInput!): NewsPost
   createNewsPosts(data: [NewsPostCreateInput!]!): [NewsPost]
   updateNewsPost(
@@ -390,6 +477,14 @@ type Query {
   ): [Teacher!]
   teacher(where: TeacherWhereUniqueInput!): Teacher
   teachersCount(where: TeacherWhereInput! = {}): Int
+  menuItems(
+    where: MenuItemWhereInput! = {}
+    orderBy: [MenuItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [MenuItem!]
+  menuItem(where: MenuItemWhereUniqueInput!): MenuItem
+  menuItemsCount(where: MenuItemWhereInput! = {}): Int
   newsPosts(
     where: NewsPostWhereInput! = {}
     orderBy: [NewsPostOrderByInput!]! = []

@@ -44,6 +44,16 @@ model Teacher {
   additionalInfo                    String    @default("")
 }
 
+model MenuItem {
+  id                     String     @id @default(cuid())
+  title                  String     @default("")
+  weigth                 Int?
+  subItems               MenuItem[] @relation("MenuItem_subItems")
+  slug                   String     @default("")
+  isTopLevel             Boolean    @default(false)
+  from_MenuItem_subItems MenuItem[] @relation("MenuItem_subItems")
+}
+
 model NewsPost {
   id              String    @id @default(cuid())
   title           String    @default("")
