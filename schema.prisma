@@ -43,3 +43,10 @@ model Teacher {
   experience                        String    @default("")
   additionalInfo                    String    @default("")
 }
+
+model NewsPost {
+  id              String    @id @default(cuid())
+  title           String    @default("")
+  content         String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  publicationDate DateTime?
+}

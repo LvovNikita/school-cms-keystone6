@@ -1,4 +1,4 @@
-import { text, select, timestamp, integer, json } from '@keystone-6/core/fields';
+import { text, select, timestamp, integer, json } from '@keystone-6/core/fields'
 
 module.exports = {
     fields: {
@@ -10,19 +10,19 @@ module.exports = {
             datatype: 'enum',
             options: [
                 { label: 'Учитель', value: 'TEACHER' },
-                { label: 'Заместитель директора', value: 'DEPUTEE_DIRECTOR'},
-                { label: 'Директор', value: 'DIRECTOR'}
+                { label: 'Заместитель директора', value: 'DEPUTEE_DIRECTOR' },
+                { label: 'Директор', value: 'DIRECTOR' }
             ]
         }),
         subjects: json({}),
         email: text(),
         phone: text(),
-        category : select({
+        category: select({
             datatype: 'enum',
             options: [
-                { label: 'Высшая', value: 'HIGHEST'},
-                { label: 'Первая', value: 'FIRST'},
-                { label: 'Отсутствует', value: 'NONE'},
+                { label: 'Высшая', value: 'HIGHEST' },
+                { label: 'Первая', value: 'FIRST' },
+                { label: 'Отсутствует', value: 'NONE' }
             ]
         }),
         education: text(),
@@ -30,15 +30,15 @@ module.exports = {
             datatype: 'enum',
             options: [
                 { label: 'Высшее', value: 'HIED' },
-                { label: 'Высшее педагогическое', value: 'PED'},
-                { label: 'Среднее-профессиональное', value: 'VOCED'}
+                { label: 'Высшее педагогическое', value: 'PED' },
+                { label: 'Среднее-профессиональное', value: 'VOCED' }
             ]
         }),
         degree: select({
             datatype: 'enum',
             options: [
-                { label: 'Кандидат наук', value: 'CANDIDATE'},
-                { label: 'Доктор наук', value: 'DOCTOR' } 
+                { label: 'Кандидат наук', value: 'CANDIDATE' },
+                { label: 'Доктор наук', value: 'DOCTOR' }
             ]
         }),
         academicTitle: select({
@@ -48,7 +48,7 @@ module.exports = {
                 { label: 'Преподаватель', value: 'LECTURER' },
                 { label: 'Старший преподаватель', value: 'SENIOR_LECTURER' },
                 { label: 'Доцент', value: 'ASSOCIATE' },
-                { label: 'Профессор', value: 'PROFESSOR' },
+                { label: 'Профессор', value: 'PROFESSOR' }
             ]
         }),
         totalYearsExperience: integer(),

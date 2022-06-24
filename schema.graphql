@@ -291,6 +291,53 @@ input TeacherCreateInput {
   additionalInfo: String
 }
 
+type NewsPost {
+  id: ID!
+  title: String
+  content: NewsPost_content_Document
+  publicationDate: DateTime
+}
+
+type NewsPost_content_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input NewsPostWhereUniqueInput {
+  id: ID
+}
+
+input NewsPostWhereInput {
+  AND: [NewsPostWhereInput!]
+  OR: [NewsPostWhereInput!]
+  NOT: [NewsPostWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  publicationDate: DateTimeNullableFilter
+}
+
+input NewsPostOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  publicationDate: OrderDirection
+}
+
+input NewsPostUpdateInput {
+  title: String
+  content: JSON
+  publicationDate: DateTime
+}
+
+input NewsPostUpdateArgs {
+  where: NewsPostWhereUniqueInput!
+  data: NewsPostUpdateInput!
+}
+
+input NewsPostCreateInput {
+  title: String
+  content: JSON
+  publicationDate: DateTime
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -315,6 +362,15 @@ type Mutation {
   updateTeachers(data: [TeacherUpdateArgs!]!): [Teacher]
   deleteTeacher(where: TeacherWhereUniqueInput!): Teacher
   deleteTeachers(where: [TeacherWhereUniqueInput!]!): [Teacher]
+  createNewsPost(data: NewsPostCreateInput!): NewsPost
+  createNewsPosts(data: [NewsPostCreateInput!]!): [NewsPost]
+  updateNewsPost(
+    where: NewsPostWhereUniqueInput!
+    data: NewsPostUpdateInput!
+  ): NewsPost
+  updateNewsPosts(data: [NewsPostUpdateArgs!]!): [NewsPost]
+  deleteNewsPost(where: NewsPostWhereUniqueInput!): NewsPost
+  deleteNewsPosts(where: [NewsPostWhereUniqueInput!]!): [NewsPost]
 }
 
 type Query {
@@ -334,6 +390,14 @@ type Query {
   ): [Teacher!]
   teacher(where: TeacherWhereUniqueInput!): Teacher
   teachersCount(where: TeacherWhereInput! = {}): Int
+  newsPosts(
+    where: NewsPostWhereInput! = {}
+    orderBy: [NewsPostOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [NewsPost!]
+  newsPost(where: NewsPostWhereUniqueInput!): NewsPost
+  newsPostsCount(where: NewsPostWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 
