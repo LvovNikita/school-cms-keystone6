@@ -113,15 +113,15 @@ type Teacher {
   lastname: String
   middlename: String
   dateOfBirth: DateTime
-  position: String
+  position: TeacherPositionType
   subjects: JSON
   email: String
   phone: String
-  category: String
+  category: TeacherCategoryType
   education: String
-  educationLevel: String
-  degree: String
-  academicTitle: String
+  educationLevel: TeacherEducationLevelType
+  degree: TeacherDegreeType
+  academicTitle: TeacherAcademicTitleType
   totalYearsExperience: Int
   totalYearsExperienceUpdateDate: DateTime
   teachingExperienceYears: Int
@@ -134,6 +134,37 @@ type Teacher {
 
 scalar DateTime
   @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+enum TeacherPositionType {
+  TEACHER
+  DEPUTEE_DIRECTOR
+  DIRECTOR
+}
+
+enum TeacherCategoryType {
+  HIGHEST
+  FIRST
+  NONE
+}
+
+enum TeacherEducationLevelType {
+  HIED
+  PED
+  VOCED
+}
+
+enum TeacherDegreeType {
+  CANDIDATE
+  DOCTOR
+}
+
+enum TeacherAcademicTitleType {
+  ASSISTANT
+  LECTURER
+  SENIOR_LECTURER
+  ASSOCIATE
+  PROFESSOR
+}
 
 input TeacherWhereUniqueInput {
   id: ID
@@ -148,14 +179,14 @@ input TeacherWhereInput {
   lastname: StringFilter
   middlename: StringFilter
   dateOfBirth: DateTimeNullableFilter
-  position: StringNullableFilter
+  position: TeacherPositionTypeNullableFilter
   email: StringFilter
   phone: StringFilter
-  category: StringNullableFilter
+  category: TeacherCategoryTypeNullableFilter
   education: StringFilter
-  educationLevel: StringNullableFilter
-  degree: StringNullableFilter
-  academicTitle: StringNullableFilter
+  educationLevel: TeacherEducationLevelTypeNullableFilter
+  degree: TeacherDegreeTypeNullableFilter
+  academicTitle: TeacherAcademicTitleTypeNullableFilter
   totalYearsExperience: IntNullableFilter
   totalYearsExperienceUpdateDate: DateTimeNullableFilter
   teachingExperienceYears: IntNullableFilter
@@ -176,32 +207,39 @@ input DateTimeNullableFilter {
   not: DateTimeNullableFilter
 }
 
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
+input TeacherPositionTypeNullableFilter {
+  equals: TeacherPositionType
+  in: [TeacherPositionType!]
+  notIn: [TeacherPositionType!]
+  not: TeacherPositionTypeNullableFilter
 }
 
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
+input TeacherCategoryTypeNullableFilter {
+  equals: TeacherCategoryType
+  in: [TeacherCategoryType!]
+  notIn: [TeacherCategoryType!]
+  not: TeacherCategoryTypeNullableFilter
+}
+
+input TeacherEducationLevelTypeNullableFilter {
+  equals: TeacherEducationLevelType
+  in: [TeacherEducationLevelType!]
+  notIn: [TeacherEducationLevelType!]
+  not: TeacherEducationLevelTypeNullableFilter
+}
+
+input TeacherDegreeTypeNullableFilter {
+  equals: TeacherDegreeType
+  in: [TeacherDegreeType!]
+  notIn: [TeacherDegreeType!]
+  not: TeacherDegreeTypeNullableFilter
+}
+
+input TeacherAcademicTitleTypeNullableFilter {
+  equals: TeacherAcademicTitleType
+  in: [TeacherAcademicTitleType!]
+  notIn: [TeacherAcademicTitleType!]
+  not: TeacherAcademicTitleTypeNullableFilter
 }
 
 input IntNullableFilter {
@@ -243,15 +281,15 @@ input TeacherUpdateInput {
   lastname: String
   middlename: String
   dateOfBirth: DateTime
-  position: String
+  position: TeacherPositionType
   subjects: JSON
   email: String
   phone: String
-  category: String
+  category: TeacherCategoryType
   education: String
-  educationLevel: String
-  degree: String
-  academicTitle: String
+  educationLevel: TeacherEducationLevelType
+  degree: TeacherDegreeType
+  academicTitle: TeacherAcademicTitleType
   totalYearsExperience: Int
   totalYearsExperienceUpdateDate: DateTime
   teachingExperienceYears: Int
@@ -272,15 +310,15 @@ input TeacherCreateInput {
   lastname: String
   middlename: String
   dateOfBirth: DateTime
-  position: String
+  position: TeacherPositionType
   subjects: JSON
   email: String
   phone: String
-  category: String
+  category: TeacherCategoryType
   education: String
-  educationLevel: String
-  degree: String
-  academicTitle: String
+  educationLevel: TeacherEducationLevelType
+  degree: TeacherDegreeType
+  academicTitle: TeacherAcademicTitleType
   totalYearsExperience: Int
   totalYearsExperienceUpdateDate: DateTime
   teachingExperienceYears: Int
@@ -303,6 +341,7 @@ type MenuItem {
   ): [MenuItem!]
   subItemsCount(where: MenuItemWhereInput! = {}): Int
   slug: String
+  pageRef: Page
   isTopLevel: Boolean
 }
 
@@ -319,6 +358,7 @@ input MenuItemWhereInput {
   weigth: IntNullableFilter
   subItems: MenuItemManyRelationFilter
   slug: StringFilter
+  pageRef: PageWhereInput
   isTopLevel: BooleanFilter
 }
 
@@ -341,6 +381,7 @@ input MenuItemUpdateInput {
   weigth: Int
   subItems: MenuItemRelateToManyForUpdateInput
   slug: String
+  pageRef: PageRelateToOneForUpdateInput
   isTopLevel: Boolean
 }
 
@@ -349,6 +390,12 @@ input MenuItemRelateToManyForUpdateInput {
   set: [MenuItemWhereUniqueInput!]
   create: [MenuItemCreateInput!]
   connect: [MenuItemWhereUniqueInput!]
+}
+
+input PageRelateToOneForUpdateInput {
+  create: PageCreateInput
+  connect: PageWhereUniqueInput
+  disconnect: Boolean
 }
 
 input MenuItemUpdateArgs {
@@ -361,12 +408,68 @@ input MenuItemCreateInput {
   weigth: Int
   subItems: MenuItemRelateToManyForCreateInput
   slug: String
+  pageRef: PageRelateToOneForCreateInput
   isTopLevel: Boolean
 }
 
 input MenuItemRelateToManyForCreateInput {
   create: [MenuItemCreateInput!]
   connect: [MenuItemWhereUniqueInput!]
+}
+
+input PageRelateToOneForCreateInput {
+  create: PageCreateInput
+  connect: PageWhereUniqueInput
+}
+
+type Page {
+  id: ID!
+  title: String
+  menuItemRef: MenuItem
+}
+
+input PageWhereUniqueInput {
+  id: ID
+}
+
+input PageWhereInput {
+  AND: [PageWhereInput!]
+  OR: [PageWhereInput!]
+  NOT: [PageWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  menuItemRef: MenuItemWhereInput
+}
+
+input PageOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+}
+
+input PageUpdateInput {
+  title: String
+  menuItemRef: MenuItemRelateToOneForUpdateInput
+}
+
+input MenuItemRelateToOneForUpdateInput {
+  create: MenuItemCreateInput
+  connect: MenuItemWhereUniqueInput
+  disconnect: Boolean
+}
+
+input PageUpdateArgs {
+  where: PageWhereUniqueInput!
+  data: PageUpdateInput!
+}
+
+input PageCreateInput {
+  title: String
+  menuItemRef: MenuItemRelateToOneForCreateInput
+}
+
+input MenuItemRelateToOneForCreateInput {
+  create: MenuItemCreateInput
+  connect: MenuItemWhereUniqueInput
 }
 
 type NewsPost {
@@ -449,6 +552,12 @@ type Mutation {
   updateMenuItems(data: [MenuItemUpdateArgs!]!): [MenuItem]
   deleteMenuItem(where: MenuItemWhereUniqueInput!): MenuItem
   deleteMenuItems(where: [MenuItemWhereUniqueInput!]!): [MenuItem]
+  createPage(data: PageCreateInput!): Page
+  createPages(data: [PageCreateInput!]!): [Page]
+  updatePage(where: PageWhereUniqueInput!, data: PageUpdateInput!): Page
+  updatePages(data: [PageUpdateArgs!]!): [Page]
+  deletePage(where: PageWhereUniqueInput!): Page
+  deletePages(where: [PageWhereUniqueInput!]!): [Page]
   createNewsPost(data: NewsPostCreateInput!): NewsPost
   createNewsPosts(data: [NewsPostCreateInput!]!): [NewsPost]
   updateNewsPost(
@@ -485,6 +594,14 @@ type Query {
   ): [MenuItem!]
   menuItem(where: MenuItemWhereUniqueInput!): MenuItem
   menuItemsCount(where: MenuItemWhereInput! = {}): Int
+  pages(
+    where: PageWhereInput! = {}
+    orderBy: [PageOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Page!]
+  page(where: PageWhereUniqueInput!): Page
+  pagesCount(where: PageWhereInput! = {}): Int
   newsPosts(
     where: NewsPostWhereInput! = {}
     orderBy: [NewsPostOrderByInput!]! = []

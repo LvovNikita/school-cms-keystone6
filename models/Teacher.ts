@@ -7,7 +7,7 @@ module.exports = {
         middlename: text(),
         dateOfBirth: timestamp(),
         position: select({
-            datatype: 'enum',
+            type: 'enum',
             options: [
                 { label: 'Учитель', value: 'TEACHER' },
                 { label: 'Заместитель директора', value: 'DEPUTEE_DIRECTOR' },
@@ -18,7 +18,7 @@ module.exports = {
         email: text(),
         phone: text(),
         category: select({
-            datatype: 'enum',
+            type: 'enum',
             options: [
                 { label: 'Высшая', value: 'HIGHEST' },
                 { label: 'Первая', value: 'FIRST' },
@@ -27,7 +27,7 @@ module.exports = {
         }),
         education: text(),
         educationLevel: select({
-            datatype: 'enum',
+            type: 'enum',
             options: [
                 { label: 'Высшее', value: 'HIED' },
                 { label: 'Высшее педагогическое', value: 'PED' },
@@ -35,14 +35,14 @@ module.exports = {
             ]
         }),
         degree: select({
-            datatype: 'enum',
+            type: 'enum',
             options: [
                 { label: 'Кандидат наук', value: 'CANDIDATE' },
                 { label: 'Доктор наук', value: 'DOCTOR' }
             ]
         }),
         academicTitle: select({
-            datatype: 'enum',
+            type: 'enum',
             options: [
                 { label: 'Ассистент', value: 'ASSISTANT' },
                 { label: 'Преподаватель', value: 'LECTURER' },

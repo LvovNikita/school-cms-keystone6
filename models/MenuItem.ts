@@ -7,7 +7,7 @@ module.exports = {
         weigth: integer(),
         subItems: relationship({ ref: 'MenuItem', many: true }),
         slug: text(),
-        // pegeRef: relationship
+        pageRef: relationship({ ref: 'Page.menuItemRef', many: false }),
         isTopLevel: checkbox()
     }
 }

@@ -50,8 +50,16 @@ model MenuItem {
   weigth                 Int?
   subItems               MenuItem[] @relation("MenuItem_subItems")
   slug                   String     @default("")
+  pageRef                Page?      @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
+  pageRefId              String?    @unique @map("pageRef")
   isTopLevel             Boolean    @default(false)
   from_MenuItem_subItems MenuItem[] @relation("MenuItem_subItems")
+}
+
+model Page {
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  menuItemRef MenuItem? @relation("MenuItem_pageRef")
 }
 
 model NewsPost {
