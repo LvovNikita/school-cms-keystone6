@@ -369,6 +369,7 @@ type PasswordState {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 
 input UserWhereInput {
@@ -377,13 +378,8 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   id: IDFilter
   username: StringFilter
-  password: PasswordFilter
   email: StringFilter
   isAdmin: BooleanFilter
-}
-
-input PasswordFilter {
-  isSet: Boolean!
 }
 
 input UserOrderByInput {
