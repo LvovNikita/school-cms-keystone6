@@ -369,7 +369,6 @@ type PasswordState {
 
 input UserWhereUniqueInput {
   id: ID
-  email: String
 }
 
 input UserWhereInput {
@@ -415,7 +414,7 @@ type Teacher {
   middlename: String
   dateOfBirth: DateTime
   position: TeacherPositionType
-  subjects: JSON
+  subjects: String
   email: String
   phone: String
   category: TeacherCategoryType
@@ -424,12 +423,9 @@ type Teacher {
   degree: TeacherDegreeType
   academicTitle: TeacherAcademicTitleType
   totalYearsExperience: Int
-  totalYearsExperienceUpdateDate: DateTime
   teachingExperienceYears: Int
-  teachingExperienceYearsUpdateDate: DateTime
   worksSinceDate: DateTime
-  trainings: JSON
-  experience: String
+  trainings: String
   additionalInfo: String
 }
 
@@ -478,6 +474,7 @@ input TeacherWhereInput {
   middlename: StringFilter
   dateOfBirth: DateTimeNullableFilter
   position: TeacherPositionTypeNullableFilter
+  subjects: StringFilter
   email: StringFilter
   phone: StringFilter
   category: TeacherCategoryTypeNullableFilter
@@ -486,11 +483,9 @@ input TeacherWhereInput {
   degree: TeacherDegreeTypeNullableFilter
   academicTitle: TeacherAcademicTitleTypeNullableFilter
   totalYearsExperience: IntNullableFilter
-  totalYearsExperienceUpdateDate: DateTimeNullableFilter
   teachingExperienceYears: IntNullableFilter
-  teachingExperienceYearsUpdateDate: DateTimeNullableFilter
   worksSinceDate: DateTimeNullableFilter
-  experience: StringFilter
+  trainings: StringFilter
   additionalInfo: StringFilter
 }
 
@@ -536,6 +531,7 @@ input TeacherOrderByInput {
   middlename: OrderDirection
   dateOfBirth: OrderDirection
   position: OrderDirection
+  subjects: OrderDirection
   email: OrderDirection
   phone: OrderDirection
   category: OrderDirection
@@ -544,11 +540,9 @@ input TeacherOrderByInput {
   degree: OrderDirection
   academicTitle: OrderDirection
   totalYearsExperience: OrderDirection
-  totalYearsExperienceUpdateDate: OrderDirection
   teachingExperienceYears: OrderDirection
-  teachingExperienceYearsUpdateDate: OrderDirection
   worksSinceDate: OrderDirection
-  experience: OrderDirection
+  trainings: OrderDirection
   additionalInfo: OrderDirection
 }
 
@@ -558,7 +552,7 @@ input TeacherUpdateInput {
   middlename: String
   dateOfBirth: DateTime
   position: TeacherPositionType
-  subjects: JSON
+  subjects: String
   email: String
   phone: String
   category: TeacherCategoryType
@@ -567,12 +561,9 @@ input TeacherUpdateInput {
   degree: TeacherDegreeType
   academicTitle: TeacherAcademicTitleType
   totalYearsExperience: Int
-  totalYearsExperienceUpdateDate: DateTime
   teachingExperienceYears: Int
-  teachingExperienceYearsUpdateDate: DateTime
   worksSinceDate: DateTime
-  trainings: JSON
-  experience: String
+  trainings: String
   additionalInfo: String
 }
 
@@ -587,7 +578,7 @@ input TeacherCreateInput {
   middlename: String
   dateOfBirth: DateTime
   position: TeacherPositionType
-  subjects: JSON
+  subjects: String
   email: String
   phone: String
   category: TeacherCategoryType
@@ -596,12 +587,9 @@ input TeacherCreateInput {
   degree: TeacherDegreeType
   academicTitle: TeacherAcademicTitleType
   totalYearsExperience: Int
-  totalYearsExperienceUpdateDate: DateTime
   teachingExperienceYears: Int
-  teachingExperienceYearsUpdateDate: DateTime
   worksSinceDate: DateTime
-  trainings: JSON
-  experience: String
+  trainings: String
   additionalInfo: String
 }
 

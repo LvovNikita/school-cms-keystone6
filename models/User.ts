@@ -7,44 +7,40 @@ interface userListOptions {
     isAdmin
 }
 
-let opts: userListOptions
-
-opts.username = {
-    label: 'Имя пользователь',
-    validation: {
-        isRequired: true,
-        length: {
-            min: 2
+const opts: userListOptions = {
+    username: {
+        label: 'Имя пользователь',
+        validation: {
+            isRequired: true,
+            length: {
+                min: 2
+            }
         }
-    }
-}
-
-opts.password = {
-    label: 'Пароль',
-    db: {
-        isNullable: false
     },
-    validation: {
-        isRequired: true,
-        rejectCommon: true,
-        length: {
-            min: 8,
-            max: 32
+    password: {
+        label: 'Пароль',
+        db: {
+            isNullable: false
+        },
+        validation: {
+            isRequired: true,
+            rejectCommon: true,
+            length: {
+                min: 8,
+                max: 32
+            }
         }
+    },
+    email: {
+        label: 'Адрес электронной почты',
+        validation: {
+            isRequired: true
+        }
+    },
+    isAdmin: {
+        label: 'Является администратором',
+        defaultValue: false
     }
-}
-
-opts.email = {
-    label: 'Адрес электронной почты',
-    validation: {
-        isRequired: true
-    }
-    // isIndexed: 'unique'
-}
-
-opts.isAdmin = {
-    label: 'Является администратором',
-    defaultValue: false
 }
 
 module.exports = {
