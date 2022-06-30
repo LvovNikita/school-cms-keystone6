@@ -611,6 +611,7 @@ type MenuItem {
 
 input MenuItemWhereUniqueInput {
   id: ID
+  slug: String
 }
 
 input MenuItemWhereInput {

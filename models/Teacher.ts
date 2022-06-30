@@ -71,8 +71,8 @@ module.exports = {
         totalYearsExperience: integer({ label: 'Общий трудовой стаж', ...opts.yearsOfExperience }),
         teachingExperienceYears: integer({ label: 'Педагогический стаж', ...opts.yearsOfExperience }),
         worksSinceDate: timestamp({ label: 'Работает в данном учреждении с:' }),
-        trainings: text({ label: 'Курсы повышения квалификации' }),
-        additionalInfo: text({ label: 'О педагоге:' })
+        trainings: text({ label: 'Курсы повышения квалификации', ui: { displayMode: 'textarea' } }),
+        additionalInfo: text({ label: 'О педагоге:', ui: { displayMode: 'textarea' } })
         // totalYearsExperienceUpdateDate: timestamp({
         //     label: 'Дата обновления информации о стаже',
         // }),

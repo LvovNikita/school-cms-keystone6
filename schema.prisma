@@ -100,9 +100,9 @@ model Teacher {
 model MenuItem {
   id                     String     @id @default(cuid())
   title                  String     @default("")
-  weigth                 Int?
+  weigth                 Int?       @default(999)
   subItems               MenuItem[] @relation("MenuItem_subItems")
-  slug                   String     @default("")
+  slug                   String     @unique @default("")
   pageRef                Page?      @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
   pageRefId              String?    @unique @map("pageRef")
   isTopLevel             Boolean    @default(false)
@@ -127,5 +127,5 @@ model NewsPost {
   id              String    @id @default(cuid())
   title           String    @default("")
   content         String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publicationDate DateTime?
+  publicationDate DateTime? @default(now())
 }
