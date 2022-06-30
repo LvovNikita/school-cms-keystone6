@@ -32,7 +32,7 @@ const AcademicTitles = [
 ]
 
 const opts = {
-    name: {
+    required: {
         validation: {
             isRequired: true
         }
@@ -55,8 +55,8 @@ const opts = {
 module.exports = {
     label: 'Учитель',
     fields: {
-        firstname: text({ label: 'Имя', ...opts.name }),
-        lastname: text({ label: 'Фамилия', ...opts.name }),
+        firstname: text({ label: 'Имя', ...opts.required }),
+        lastname: text({ label: 'Фамилия', ...opts.required }),
         middlename: text({ label: 'Отчество' }),
         dateOfBirth: timestamp({ label: 'Дата рождения' }),
         position: select({ label: 'Должность', ...opts.enum(Positions) }),

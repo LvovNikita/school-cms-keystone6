@@ -11,57 +11,59 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
-model Info {
-  id                               String    @id @default(cuid())
-  schoolName                       String    @default("")
-  schoolNameAbbr                   String    @default("")
-  director                         Teacher?  @relation("Info_director", fields: [directorId], references: [id])
-  directorId                       String?   @map("director")
-  address                          String    @default("")
-  website                          String    @default("")
-  email                            String    @default("")
-  phone                            String    @default("")
-  fax                              String    @default("")
-  schedule                         String    @default("")
-  founder                          String    @default("")
-  founderAddress                   String    @default("")
-  founderWebSite                   String    @default("")
-  founderEmail                     String    @default("")
-  founderPhone                     String    @default("")
-  hasPreSchoolEducationLevel       Boolean   @default(false)
-  hasPrimarySchoolEducationLevel   Boolean   @default(false)
-  hasSecondarySchoolEducationLevel Boolean   @default(false)
-  OGRN                             Int?
-  INN                              Int?
-  INNStartDate                     DateTime?
-  KPP                              Int?
-  OKOPF                            String    @default("")
-  OKFS                             String    @default("")
-  licenseNumber                    Int?
-  licenseStartDate                 DateTime?
-  isLicensePermanent               Boolean   @default(false)
-  licenseEndDate                   DateTime?
-  accreditationRegNumber           String    @default("")
-  accreditationSerialNumber        String    @default("")
-  accreditationStartDate           DateTime?
-  accreditationEndDate             DateTime?
-  numOfFirstGrades                 Int?
-  numOfSecondGrades                Int?
-  numOfThirdGrades                 Int?
-  numOfFourthGrades                Int?
-  numOfFifthrades                  Int?
-  numOfSixthGrades                 Int?
-  numOfSeventhGrades               Int?
-  numOfEighthGrades                Int?
-  numOfNenethGrades                Int?
-  numOfTenthGrades                 Int?
-  numOfEleventhGrades              Int?
-  numOfElementarySchoolPupils      Int?
-  numOfMiddleSchoolPupils          Int?
-  numOfHighSchoolPupils            Int?
-  gradeOneVacantPlaces             Int?
-  gradeFiveVacantPlaces            Int?
-  vacantPlacesUpdateDate           DateTime?
+model School {
+  id                                  String    @id @default(cuid())
+  schoolName                          String    @default("")
+  schoolNameAbbr                      String    @default("")
+  director                            Teacher?  @relation("School_director", fields: [directorId], references: [id])
+  directorId                          String?   @map("director")
+  address                             String    @default("")
+  website                             String    @default("")
+  email                               String    @default("")
+  phone                               String    @default("")
+  fax                                 String    @default("")
+  schedule                            String    @default("")
+  OGRN                                Int?
+  INN                                 Int?
+  INNStartDate                        DateTime?
+  KPP                                 Int?
+  OKOPF                               String    @default("")
+  OKFS                                String    @default("")
+  licenseRegNumber                    Int?
+  licenseSerialNumber                 String    @default("")
+  licenseStartDate                    DateTime?
+  isLicensePermanent                  Boolean   @default(false)
+  licenseEndDate                      DateTime?
+  accreditationRegNumber              String    @default("")
+  accreditationSerialNumber           String    @default("")
+  accreditationStartDate              DateTime?
+  accreditationEndDate                DateTime?
+  founder                             String    @default("")
+  founderAddress                      String    @default("")
+  founderWebSite                      String    @default("")
+  founderEmail                        String    @default("")
+  founderPhone                        String    @default("")
+  hasPreSchoolEducationLevel          Boolean   @default(false)
+  numOfPreSchoolLevelPupils           Int?      @default(0)
+  hasPrimarySchoolEducationLevel      Boolean   @default(true)
+  numOfPrimarySchooLevelPupils        Int?
+  gradeOneVacantPlaces                Int?      @default(0)
+  numOfFirstGrades                    Int?
+  numOfSecondGrades                   Int?
+  numOfThirdGrades                    Int?
+  numOfFourthGrades                   Int?
+  hasBasicGeneralSchoolEducationLevel Boolean   @default(true)
+  numOfBasicGeneralSchoolLevelPupils  Int?
+  gradeFiveVacantPlaces               Int?      @default(0)
+  numOfFifthrades                     Int?
+  numOfSixthGrades                    Int?
+  numOfSeventhGrades                  Int?
+  numOfEighthGrades                   Int?
+  numOfNenethGrades                   Int?
+  hasSecondarySchoolEducationLevel    Boolean   @default(true)
+  numOfSecondarySchoolLevelPupils     Int?
+  numOfTenthGrades                    Int?
+  numOfEleventhGrades                 Int?
 
   @@index([directorId])
 }
@@ -94,7 +96,7 @@ model Teacher {
   worksSinceDate          DateTime?
   trainings               String    @default("")
   additionalInfo          String    @default("")
-  from_Info_director      Info[]    @relation("Info_director")
+  from_School_director    School[]  @relation("School_director")
 }
 
 model MenuItem {
@@ -105,7 +107,7 @@ model MenuItem {
   slug                   String     @unique @default("")
   pageRef                Page?      @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
   pageRefId              String?    @unique @map("pageRef")
-  isTopLevel             Boolean    @default(false)
+  isTopLevel             Boolean    @default(true)
   from_MenuItem_subItems MenuItem[] @relation("MenuItem_subItems")
 }
 
