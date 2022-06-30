@@ -39,7 +39,7 @@ const opts: menuItemListOptions = {
         many: false
     },
     isTopLevel: {
-        defaultValue: true
+        label: 'Расположить в главном меню:'
     }
 }
 

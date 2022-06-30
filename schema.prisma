@@ -69,11 +69,15 @@ model School {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  username String  @default("")
-  password String
-  email    String  @default("")
-  isAdmin  Boolean @default(false)
+  id           String   @id @default(cuid())
+  username     String   @default("")
+  password     String
+  email        String   @default("")
+  teacherRef   Teacher? @relation("User_teacherRef", fields: [teacherRefId], references: [id])
+  teacherRefId String?  @map("teacherRef")
+  isAdmin      Boolean  @default(false)
+
+  @@index([teacherRefId])
 }
 
 model Teacher {
@@ -97,6 +101,7 @@ model Teacher {
   trainings               String    @default("")
   additionalInfo          String    @default("")
   from_School_director    School[]  @relation("School_director")
+  from_User_teacherRef    User[]    @relation("User_teacherRef")
 }
 
 model MenuItem {
@@ -107,7 +112,7 @@ model MenuItem {
   slug                   String     @unique @default("")
   pageRef                Page?      @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
   pageRefId              String?    @unique @map("pageRef")
-  isTopLevel             Boolean    @default(true)
+  isTopLevel             Boolean    @default(false)
   from_MenuItem_subItems MenuItem[] @relation("MenuItem_subItems")
 }
 

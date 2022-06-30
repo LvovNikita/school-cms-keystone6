@@ -1,9 +1,10 @@
-import { text, password, checkbox } from '@keystone-6/core/fields'
+import { text, password, checkbox, relationship } from '@keystone-6/core/fields'
 
 interface userListOptions {
     username,
     password,
     email,
+    teacherRef,
     isAdmin
 }
 
@@ -37,6 +38,11 @@ const opts: userListOptions = {
             isRequired: true
         }
     },
+    teacherRef: {
+        label: 'Связать с профилем учителя:',
+        ref: 'Teacher',
+        many: false
+    },
     isAdmin: {
         label: 'Является администратором',
         defaultValue: false
@@ -48,6 +54,7 @@ module.exports = {
         username: text(opts.username),
         password: password(opts.password),
         email: text(opts.email),
+        teacherRef: relationship(opts.teacherRef),
         isAdmin: checkbox(opts.isAdmin)
     }
 }

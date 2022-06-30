@@ -370,6 +370,7 @@ type User {
   username: String
   password: PasswordState
   email: String
+  teacherRef: Teacher
   isAdmin: Boolean
 }
 
@@ -388,6 +389,7 @@ input UserWhereInput {
   id: IDFilter
   username: StringFilter
   email: StringFilter
+  teacherRef: TeacherWhereInput
   isAdmin: BooleanFilter
 }
 
@@ -402,6 +404,7 @@ input UserUpdateInput {
   username: String
   password: String
   email: String
+  teacherRef: TeacherRelateToOneForUpdateInput
   isAdmin: Boolean
 }
 
@@ -414,6 +417,7 @@ input UserCreateInput {
   username: String
   password: String
   email: String
+  teacherRef: TeacherRelateToOneForCreateInput
   isAdmin: Boolean
 }
 
