@@ -44,10 +44,11 @@ const opts = {
         },
         hooks: {}
     },
-    enum (enumArr): { type, options } {
+    enum (enumArr): { type, options, ui } {
         return {
             type: 'enum',
-            options: enumArr
+            options: enumArr,
+            ui: { displayMode: 'segmented-control' }
         }
     }
 }
