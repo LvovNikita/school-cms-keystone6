@@ -5,6 +5,7 @@ interface menuItemListOptions {
     title,
     weight,
     slug,
+    mainMenuRef,
     pageRef,
 }
 
@@ -26,6 +27,11 @@ const opts: menuItemListOptions = {
         },
         isIndexed: 'unique'
     },
+    mainMenuRef: {
+        label: 'Нахожится в разделе основного меню:',
+        ref: 'MainMenuItem.subItemsRef',
+        many: false
+    },
     pageRef: {
         label: 'Переход через пункт меню на страницу:',
         ref: 'Page.menuItemRef',
@@ -38,6 +44,7 @@ module.exports = {
         title: text(opts.title),
         weight: integer(opts.weight),
         slug: text(opts.slug),
+        mainMenuRef: relationship(opts.mainMenuRef),
         pageRef: relationship(opts.pageRef)
     }
 }

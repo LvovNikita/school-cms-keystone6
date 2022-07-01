@@ -3,7 +3,7 @@ import { integer, text, relationship } from '@keystone-6/core/fields'
 interface mainMenuItemListOptions {
     title,
     weight,
-    subItems,
+    subItemsRef,
 }
 
 const opts: mainMenuItemListOptions = {
@@ -17,9 +17,9 @@ const opts: mainMenuItemListOptions = {
         label: 'Вес (чем меньше, тем ближе к началу)',
         defaultValue: 999
     },
-    subItems: {
+    subItemsRef: {
         label: 'Пункты подменю',
-        ref: 'MenuItem',
+        ref: 'MenuItem.mainMenuRef',
         many: true
     }
 }
@@ -28,6 +28,6 @@ module.exports = {
     fields: {
         title: text(opts.title),
         weight: integer(opts.weight),
-        subItems: relationship(opts.subItems)
+        subItemsRef: relationship(opts.subItemsRef)
     }
 }

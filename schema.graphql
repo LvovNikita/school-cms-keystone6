@@ -612,13 +612,13 @@ type MainMenuItem {
   id: ID!
   title: String
   weight: Int
-  subItems(
+  subItemsRef(
     where: MenuItemWhereInput! = {}
     orderBy: [MenuItemOrderByInput!]! = []
     take: Int
     skip: Int! = 0
   ): [MenuItem!]
-  subItemsCount(where: MenuItemWhereInput! = {}): Int
+  subItemsRefCount(where: MenuItemWhereInput! = {}): Int
 }
 
 input MainMenuItemWhereUniqueInput {
@@ -632,7 +632,7 @@ input MainMenuItemWhereInput {
   id: IDFilter
   title: StringFilter
   weight: IntNullableFilter
-  subItems: MenuItemManyRelationFilter
+  subItemsRef: MenuItemManyRelationFilter
 }
 
 input MenuItemManyRelationFilter {
@@ -650,7 +650,7 @@ input MainMenuItemOrderByInput {
 input MainMenuItemUpdateInput {
   title: String
   weight: Int
-  subItems: MenuItemRelateToManyForUpdateInput
+  subItemsRef: MenuItemRelateToManyForUpdateInput
 }
 
 input MenuItemRelateToManyForUpdateInput {
@@ -668,7 +668,7 @@ input MainMenuItemUpdateArgs {
 input MainMenuItemCreateInput {
   title: String
   weight: Int
-  subItems: MenuItemRelateToManyForCreateInput
+  subItemsRef: MenuItemRelateToManyForCreateInput
 }
 
 input MenuItemRelateToManyForCreateInput {
@@ -681,6 +681,7 @@ type MenuItem {
   title: String
   weight: Int
   slug: String
+  mainMenuRef: MainMenuItem
   pageRef: Page
 }
 
@@ -697,6 +698,7 @@ input MenuItemWhereInput {
   title: StringFilter
   weight: IntNullableFilter
   slug: StringFilter
+  mainMenuRef: MainMenuItemWhereInput
   pageRef: PageWhereInput
 }
 
@@ -711,7 +713,14 @@ input MenuItemUpdateInput {
   title: String
   weight: Int
   slug: String
+  mainMenuRef: MainMenuItemRelateToOneForUpdateInput
   pageRef: PageRelateToOneForUpdateInput
+}
+
+input MainMenuItemRelateToOneForUpdateInput {
+  create: MainMenuItemCreateInput
+  connect: MainMenuItemWhereUniqueInput
+  disconnect: Boolean
 }
 
 input PageRelateToOneForUpdateInput {
@@ -729,7 +738,13 @@ input MenuItemCreateInput {
   title: String
   weight: Int
   slug: String
+  mainMenuRef: MainMenuItemRelateToOneForCreateInput
   pageRef: PageRelateToOneForCreateInput
+}
+
+input MainMenuItemRelateToOneForCreateInput {
+  create: MainMenuItemCreateInput
+  connect: MainMenuItemWhereUniqueInput
 }
 
 input PageRelateToOneForCreateInput {
