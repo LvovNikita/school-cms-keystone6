@@ -105,16 +105,21 @@ model Teacher {
   from_User_teacherRef    User[]    @relation("User_teacherRef")
 }
 
+model MainMenuItem {
+  id       String     @id @default(cuid())
+  title    String     @default("")
+  weight   Int?       @default(999)
+  subItems MenuItem[] @relation("MainMenuItem_subItems")
+}
+
 model MenuItem {
-  id                     String     @id @default(cuid())
-  title                  String     @default("")
-  weigth                 Int?       @default(999)
-  subItems               MenuItem[] @relation("MenuItem_subItems")
-  slug                   String     @unique @default("")
-  pageRef                Page?      @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
-  pageRefId              String?    @unique @map("pageRef")
-  isTopLevel             Boolean    @default(false)
-  from_MenuItem_subItems MenuItem[] @relation("MenuItem_subItems")
+  id                         String         @id @default(cuid())
+  title                      String         @default("")
+  weight                     Int?           @default(999)
+  slug                       String         @unique @default("")
+  pageRef                    Page?          @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
+  pageRefId                  String?        @unique @map("pageRef")
+  from_MainMenuItem_subItems MainMenuItem[] @relation("MainMenuItem_subItems")
 }
 
 model Page {

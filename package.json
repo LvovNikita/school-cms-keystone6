@@ -4,7 +4,8 @@
   "main": "keystone.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn keystone dev"
+    "start": "yarn keystone dev",
+    "init-data": "keystone --init-data"
   },
   "dependencies": {
     "@keystone-6/auth": "^4.0.0",

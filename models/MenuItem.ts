@@ -1,13 +1,11 @@
 
-import { checkbox, integer, text, relationship } from '@keystone-6/core/fields'
+import { integer, text, relationship } from '@keystone-6/core/fields'
 
 interface menuItemListOptions {
     title,
     weight,
-    subItems,
     slug,
     pageRef,
-    isTopLevel
 }
 
 const opts: menuItemListOptions = {
@@ -21,11 +19,6 @@ const opts: menuItemListOptions = {
         label: 'Вес (чем меньше, тем ближе к началу)',
         defaultValue: 999
     },
-    subItems: {
-        label: 'Пункты подменю',
-        ref: 'MenuItem',
-        many: true
-    },
     slug: {
         label: 'Путь в URL-адресе (path, slug)',
         validation: {
@@ -37,19 +30,14 @@ const opts: menuItemListOptions = {
         label: 'Переход через пункт меню на страницу:',
         ref: 'Page.menuItemRef',
         many: false
-    },
-    isTopLevel: {
-        label: 'Расположить в главном меню:'
     }
 }
 
 module.exports = {
     fields: {
         title: text(opts.title),
-        weigth: integer(opts.weight),
-        subItems: relationship(opts.subItems),
+        weight: integer(opts.weight),
         slug: text(opts.slug),
-        pageRef: relationship(opts.pageRef),
-        isTopLevel: checkbox(opts.isTopLevel)
+        pageRef: relationship(opts.pageRef)
     }
 }

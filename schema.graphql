@@ -608,10 +608,10 @@ input TeacherCreateInput {
   additionalInfo: String
 }
 
-type MenuItem {
+type MainMenuItem {
   id: ID!
   title: String
-  weigth: Int
+  weight: Int
   subItems(
     where: MenuItemWhereInput! = {}
     orderBy: [MenuItemOrderByInput!]! = []
@@ -619,9 +619,69 @@ type MenuItem {
     skip: Int! = 0
   ): [MenuItem!]
   subItemsCount(where: MenuItemWhereInput! = {}): Int
+}
+
+input MainMenuItemWhereUniqueInput {
+  id: ID
+}
+
+input MainMenuItemWhereInput {
+  AND: [MainMenuItemWhereInput!]
+  OR: [MainMenuItemWhereInput!]
+  NOT: [MainMenuItemWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  weight: IntNullableFilter
+  subItems: MenuItemManyRelationFilter
+}
+
+input MenuItemManyRelationFilter {
+  every: MenuItemWhereInput
+  some: MenuItemWhereInput
+  none: MenuItemWhereInput
+}
+
+input MainMenuItemOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  weight: OrderDirection
+}
+
+input MainMenuItemUpdateInput {
+  title: String
+  weight: Int
+  subItems: MenuItemRelateToManyForUpdateInput
+}
+
+input MenuItemRelateToManyForUpdateInput {
+  disconnect: [MenuItemWhereUniqueInput!]
+  set: [MenuItemWhereUniqueInput!]
+  create: [MenuItemCreateInput!]
+  connect: [MenuItemWhereUniqueInput!]
+}
+
+input MainMenuItemUpdateArgs {
+  where: MainMenuItemWhereUniqueInput!
+  data: MainMenuItemUpdateInput!
+}
+
+input MainMenuItemCreateInput {
+  title: String
+  weight: Int
+  subItems: MenuItemRelateToManyForCreateInput
+}
+
+input MenuItemRelateToManyForCreateInput {
+  create: [MenuItemCreateInput!]
+  connect: [MenuItemWhereUniqueInput!]
+}
+
+type MenuItem {
+  id: ID!
+  title: String
+  weight: Int
   slug: String
   pageRef: Page
-  isTopLevel: Boolean
 }
 
 input MenuItemWhereUniqueInput {
@@ -635,41 +695,23 @@ input MenuItemWhereInput {
   NOT: [MenuItemWhereInput!]
   id: IDFilter
   title: StringFilter
-  weigth: IntNullableFilter
-  subItems: MenuItemManyRelationFilter
+  weight: IntNullableFilter
   slug: StringFilter
   pageRef: PageWhereInput
-  isTopLevel: BooleanFilter
-}
-
-input MenuItemManyRelationFilter {
-  every: MenuItemWhereInput
-  some: MenuItemWhereInput
-  none: MenuItemWhereInput
 }
 
 input MenuItemOrderByInput {
   id: OrderDirection
   title: OrderDirection
-  weigth: OrderDirection
+  weight: OrderDirection
   slug: OrderDirection
-  isTopLevel: OrderDirection
 }
 
 input MenuItemUpdateInput {
   title: String
-  weigth: Int
-  subItems: MenuItemRelateToManyForUpdateInput
+  weight: Int
   slug: String
   pageRef: PageRelateToOneForUpdateInput
-  isTopLevel: Boolean
-}
-
-input MenuItemRelateToManyForUpdateInput {
-  disconnect: [MenuItemWhereUniqueInput!]
-  set: [MenuItemWhereUniqueInput!]
-  create: [MenuItemCreateInput!]
-  connect: [MenuItemWhereUniqueInput!]
 }
 
 input PageRelateToOneForUpdateInput {
@@ -685,16 +727,9 @@ input MenuItemUpdateArgs {
 
 input MenuItemCreateInput {
   title: String
-  weigth: Int
-  subItems: MenuItemRelateToManyForCreateInput
+  weight: Int
   slug: String
   pageRef: PageRelateToOneForCreateInput
-  isTopLevel: Boolean
-}
-
-input MenuItemRelateToManyForCreateInput {
-  create: [MenuItemCreateInput!]
-  connect: [MenuItemWhereUniqueInput!]
 }
 
 input PageRelateToOneForCreateInput {
@@ -899,6 +934,15 @@ type Mutation {
   updateTeachers(data: [TeacherUpdateArgs!]!): [Teacher]
   deleteTeacher(where: TeacherWhereUniqueInput!): Teacher
   deleteTeachers(where: [TeacherWhereUniqueInput!]!): [Teacher]
+  createMainMenuItem(data: MainMenuItemCreateInput!): MainMenuItem
+  createMainMenuItems(data: [MainMenuItemCreateInput!]!): [MainMenuItem]
+  updateMainMenuItem(
+    where: MainMenuItemWhereUniqueInput!
+    data: MainMenuItemUpdateInput!
+  ): MainMenuItem
+  updateMainMenuItems(data: [MainMenuItemUpdateArgs!]!): [MainMenuItem]
+  deleteMainMenuItem(where: MainMenuItemWhereUniqueInput!): MainMenuItem
+  deleteMainMenuItems(where: [MainMenuItemWhereUniqueInput!]!): [MainMenuItem]
   createMenuItem(data: MenuItemCreateInput!): MenuItem
   createMenuItems(data: [MenuItemCreateInput!]!): [MenuItem]
   updateMenuItem(
@@ -984,6 +1028,14 @@ type Query {
   ): [Teacher!]
   teacher(where: TeacherWhereUniqueInput!): Teacher
   teachersCount(where: TeacherWhereInput! = {}): Int
+  mainMenuItems(
+    where: MainMenuItemWhereInput! = {}
+    orderBy: [MainMenuItemOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [MainMenuItem!]
+  mainMenuItem(where: MainMenuItemWhereUniqueInput!): MainMenuItem
+  mainMenuItemsCount(where: MainMenuItemWhereInput! = {}): Int
   menuItems(
     where: MenuItemWhereInput! = {}
     orderBy: [MenuItemOrderByInput!]! = []
