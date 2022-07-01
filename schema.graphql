@@ -380,6 +380,7 @@ type PasswordState {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 
 input UserWhereInput {
@@ -928,6 +929,34 @@ type Mutation {
   updateNewsPosts(data: [NewsPostUpdateArgs!]!): [NewsPost]
   deleteNewsPost(where: NewsPostWhereUniqueInput!): NewsPost
   deleteNewsPosts(where: [NewsPostWhereUniqueInput!]!): [NewsPost]
+  endSession: Boolean!
+  authenticateUserWithPassword(
+    email: String!
+    password: String!
+  ): UserAuthenticationWithPasswordResult
+  createInitialUser(
+    data: CreateInitialUserInput!
+  ): UserAuthenticationWithPasswordSuccess!
+}
+
+union UserAuthenticationWithPasswordResult =
+    UserAuthenticationWithPasswordSuccess
+  | UserAuthenticationWithPasswordFailure
+
+type UserAuthenticationWithPasswordSuccess {
+  sessionToken: String!
+  item: User!
+}
+
+type UserAuthenticationWithPasswordFailure {
+  message: String!
+}
+
+input CreateInitialUserInput {
+  username: String
+  password: String
+  email: String
+  isAdmin: Boolean
 }
 
 type Query {
@@ -988,7 +1017,10 @@ type Query {
   newsPost(where: NewsPostWhereUniqueInput!): NewsPost
   newsPostsCount(where: NewsPostWhereInput! = {}): Int
   keystone: KeystoneMeta!
+  authenticatedItem: AuthenticatedItem
 }
+
+union AuthenticatedItem = User
 
 type KeystoneMeta {
   adminMeta: KeystoneAdminMeta!
@@ -1023,6 +1055,7 @@ type KeystoneAdminUIListMeta {
 type KeystoneAdminUIFieldMeta {
   path: String!
   label: String!
+  description: String
   isOrderable: Boolean!
   isFilterable: Boolean!
   fieldMeta: JSON

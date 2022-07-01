@@ -36,7 +36,8 @@ const opts: userListOptions = {
         label: 'Адрес электронной почты',
         validation: {
             isRequired: true
-        }
+        },
+        isIndexed: 'unique'
     },
     teacherRef: {
         label: 'Связать с профилем учителя:',

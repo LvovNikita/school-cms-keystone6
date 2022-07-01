@@ -7,8 +7,10 @@
     "start": "yarn keystone dev"
   },
   "dependencies": {
+    "@keystone-6/auth": "^4.0.0",
     "@keystone-6/core": "^2.0.0",
     "@keystone-6/fields-document": "^3.0.0",
+    "dotenv": "^16.0.1",
     "typescript": "^4.7.3"
   },
   "devDependencies": {
