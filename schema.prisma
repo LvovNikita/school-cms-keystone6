@@ -2,8 +2,9 @@
 // Modify your Keystone config when you want to change this.
 
 datasource sqlite {
-  url      = env("DATABASE_URL")
-  provider = "sqlite"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider          = "sqlite"
 }
 
 generator client {
@@ -102,6 +103,7 @@ model Teacher {
   additionalInfo          String    @default("")
   from_School_director    School[]  @relation("School_director")
   from_User_teacherRef    User[]    @relation("User_teacherRef")
+  from_Subject_teacherRef Subject[] @relation("Subject_teacherRef")
 }
 
 model MenuItem {
@@ -135,4 +137,18 @@ model NewsPost {
   title           String    @default("")
   content         String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   publicationDate DateTime? @default(now())
+}
+
+model Subject {
+  id         String    @id @default(cuid())
+  title      String    @default("")
+  teacherRef Teacher[] @relation("Subject_teacherRef")
+}
+
+model File {
+  id            String  @id @default(cuid())
+  filename      String  @default("")
+  description   String  @default("")
+  file_filesize Int?
+  file_filename String?
 }
