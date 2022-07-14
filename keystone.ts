@@ -1,8 +1,7 @@
 import { config } from '@keystone-6/core'
 import { withAuth, session } from './auth/auth'
-
-const db = require('./config/db')
-const lists = require('./schema')
+import { db } from './config/db'
+import { lists } from './schema'
 
 export default config(
     withAuth({

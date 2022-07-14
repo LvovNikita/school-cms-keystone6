@@ -1,8 +1,8 @@
 import { text } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
+import { wysiwygOptions } from '../util/fieldsOptions/wysiwygOptions'
 
 const wysiwyg = document
-const wysiwygOptions = require('../util/fieldsOptions/wysiwygOptions')
 
 interface blockListOptions {
     title,

@@ -1,4 +1,4 @@
-module.exports = {
+export const urlProtocolValidation = {
     validation: {
         match: {
             regex: /$^|^https?:\/\//,

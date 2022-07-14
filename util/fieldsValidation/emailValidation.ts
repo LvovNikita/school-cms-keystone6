@@ -1,4 +1,4 @@
-module.exports = {
+export const emailValidation = {
     validation: {
         match: {
             regex: /$^|^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,

@@ -1,7 +1,6 @@
 import { text, select, timestamp, integer } from '@keystone-6/core/fields'
-
-const emailValidation = require('../util/fieldsValidation/emailValidation')
-const phoneValidation = require('../util/fieldsValidation/phoneValidation')
+import { emailValidation } from '../util/fieldsValidation/emailValidation'
+import { phoneValidation } from '../util/fieldsValidation/phoneValidation'
 
 const Positions = [
     { label: 'Учитель', value: 'TEACHER' },

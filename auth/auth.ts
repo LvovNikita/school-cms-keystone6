@@ -1,7 +1,8 @@
 import { createAuth } from '@keystone-6/auth'
 import { statelessSessions } from '@keystone-6/core/session'
+import dotenv from 'dotenv'
 
-require('dotenv').config()
+dotenv.config()
 
 const session = statelessSessions({
     secret: process.env.SESSION_SECRET,

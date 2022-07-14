@@ -1,23 +1,23 @@
-exports.nonNegative = {
+export const nonNegative = {
     validation: {
         min: 0
     }
 }
 
-exports.checked = {
+export const checked = {
     defaultValue: true
 }
 
-exports.unchecked = {
+export const unchecked = {
     defaultValue: false
 }
 
-exports.required = {
+export const required = {
     validation: {
         isRequired: true
     }
 }
 
-exports.zeroByDefault = {
+export const zeroByDefault = {
     defaultValue: 0
 }

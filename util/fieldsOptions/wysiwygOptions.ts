@@ -1,4 +1,4 @@
-module.exports = {
+export const wysiwygOptions = {
     formatting: true,
     dividers: true,
     links: true,

@@ -1,4 +1,4 @@
-module.exports = {
+export const ogrnValidation = {
     validation: {
         match: {
             regex: /$^|^\d{13}$/,

@@ -1,4 +1,4 @@
-module.exports = {
+export const phoneValidation = {
     validation: {
         match: {
             regex: /$^|^\+\d{11}$/,

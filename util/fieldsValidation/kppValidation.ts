@@ -1,4 +1,4 @@
-module.exports = {
+export const kppValidation = {
     validation: {
         match: {
             regex: /$^|^\d{9}$/,

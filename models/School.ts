@@ -1,15 +1,13 @@
 import { checkbox, integer, relationship, text, timestamp } from '@keystone-6/core/fields'
-
-const phoneValidation = require('../util/fieldsValidation/phoneValidation')
-const emailValidation = require('../util/fieldsValidation/emailValidation')
-const urlProtocolValidation = require('../util/fieldsValidation/urlProtocolValidation')
-const ogrnValidation = require('../util/fieldsValidation/ogrnValidation')
-const innValidation = require('../util/fieldsValidation/innValidation')
-const kppValidation = require('../util/fieldsValidation/kppValidation')
-const okopfValidation = require('../util/fieldsValidation/okopfValidation')
-const okfsValidation = require('../util/fieldsValidation/okfsValidation')
-
-const { required, checked, unchecked, zeroByDefault, nonNegative } = require('../util/fieldsOptions/kesytoneShorthands')
+import { required, checked, unchecked, zeroByDefault, nonNegative } from '../util/fieldsOptions/kesytoneShorthands'
+import { phoneValidation } from '../util/fieldsValidation/phoneValidation'
+import { emailValidation } from '../util/fieldsValidation/emailValidation'
+import { urlProtocolValidation } from '../util/fieldsValidation/urlProtocolValidation'
+import { ogrnValidation } from '../util/fieldsValidation/ogrnValidation'
+import { innValidation } from '../util/fieldsValidation/innValidation'
+import { kppValidation } from '../util/fieldsValidation/kppValidation'
+import { okopfValidation } from '../util/fieldsValidation/okopfValidation'
+import { okfsValidation } from '../util/fieldsValidation/okfsValidation'
 
 const opts = {
     schoolName: {

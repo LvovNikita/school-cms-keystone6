@@ -1,4 +1,4 @@
-module.exports = {
+export const innValidation = {
     validation: {
         match: {
             regex: /$^|^\d{10}$/,

@@ -1,4 +1,4 @@
-module.exports = {
+export const okfsValidation = {
     validation: {
         match: {
             regex: /$^|^\d{2}$/,
