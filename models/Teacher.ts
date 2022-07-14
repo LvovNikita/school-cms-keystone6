@@ -1,5 +1,8 @@
 import { text, select, timestamp, integer } from '@keystone-6/core/fields'
 
+const emailValidation = require('../util/fieldsValidation/emailValidation')
+const phoneValidation = require('../util/fieldsValidation/phoneValidation')
+
 const Positions = [
     { label: 'Учитель', value: 'TEACHER' },
     { label: 'Заместитель директора', value: 'DEPUTEE_DIRECTOR' },
@@ -31,58 +34,38 @@ const AcademicTitles = [
     { label: 'Профессор', value: 'PROFESSOR' }
 ]
 
-const opts = {
-    required: {
-        validation: {
-            isRequired: true
-        }
-    },
-    yearsOfExperience: {
-        defaultValue: 0,
-        validation: {
-            min: 0
-        },
-        hooks: {}
-    },
-    enum (enumArr): { type, options, ui } {
-        return {
-            type: 'enum',
-            options: enumArr,
-            ui: { displayMode: 'segmented-control' }
-        }
+const { required, zeroByDefault, nonNegative } = require('../util/fieldsOptions/kesytoneShorthands')
+
+function segmentedEnum (enumArr): { type, options, ui } {
+    return {
+        type: 'enum',
+        options: enumArr,
+        ui: { displayMode: 'segmented-control' }
     }
 }
 
 module.exports = {
     label: 'Учитель',
     fields: {
-        firstname: text({ label: 'Имя', ...opts.required }),
-        lastname: text({ label: 'Фамилия', ...opts.required }),
+        firstname: text({ label: 'Имя', ...required }),
+        lastname: text({ label: 'Фамилия', ...required }),
         middlename: text({ label: 'Отчество' }),
         dateOfBirth: timestamp({ label: 'Дата рождения' }),
-        position: select({ label: 'Должность', ...opts.enum(Positions) }),
+        position: select({ label: 'Должность', ...segmentedEnum(Positions) }),
         subjects: text({ label: 'Преподаваемые предметы' }),
-        email: text({ label: 'Адрес электронной почты' }),
-        phone: text({ label: 'Номер телефона' }),
-        category: select({ label: 'Квалификационная категория', ...opts.enum(Categories) }),
+        email: text({ label: 'Адрес электронной почты', ...emailValidation }),
+        phone: text({ label: 'Номер телефона', ...phoneValidation }),
+        category: select({ label: 'Квалификационная категория', ...segmentedEnum(Categories) }),
         education: text({ label: 'Образование (место учёбы)' }),
-        educationLevel: select({ label: 'Уровень образования', ...opts.enum(EducationLevels) }),
-        degree: select({ label: 'Учёная степень', ...opts.enum(Degrees) }),
-        academicTitle: select({ label: 'Учёное звание', ...opts.enum(AcademicTitles) }),
-        totalYearsExperience: integer({ label: 'Общий трудовой стаж', ...opts.yearsOfExperience }),
-        teachingExperienceYears: integer({ label: 'Педагогический стаж', ...opts.yearsOfExperience }),
+        educationLevel: select({ label: 'Уровень образования', ...segmentedEnum(EducationLevels) }),
+        degree: select({ label: 'Учёная степень', ...segmentedEnum(Degrees) }),
+        academicTitle: select({ label: 'Учёное звание', ...segmentedEnum(AcademicTitles) }),
+        totalYearsExperience: integer({ label: 'Общий трудовой стаж', ...zeroByDefault, ...nonNegative }),
+        teachingExperienceYears: integer({ label: 'Педагогический стаж', ...zeroByDefault, ...nonNegative }),
         worksSinceDate: timestamp({ label: 'Работает в данном учреждении с:' }),
         trainings: text({ label: 'Курсы повышения квалификации', ui: { displayMode: 'textarea' } }),
-        additionalInfo: text({ label: 'О педагоге:', ui: { displayMode: 'textarea' } })
-        // totalYearsExperienceUpdateDate: timestamp({
-        //     label: 'Дата обновления информации о стаже',
-        // }),
-        // teachingYearsExperienceUpdateDate: timestamp({
-        //     label: 'Дата обновления информации о стаже'
-        // }),
-        // experience: text({
-        //     label: ''
-        // }),
-        // * photoUrl
+        additionalInfo: text({ label: 'О педагоге:', ui: { displayMode: 'textarea' } }),
+        experience: text({ label: 'О педагоге' }),
+        updateDate: timestamp({ label: 'Дата обновления информации о педагоге', defaultValue: { kind: 'now' } })
     }
 }

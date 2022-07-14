@@ -24,10 +24,10 @@ model School {
   phone                               String    @default("")
   fax                                 String    @default("")
   schedule                            String    @default("")
-  OGRN                                Int?
-  INN                                 Int?
+  OGRN                                String    @default("")
+  INN                                 String    @default("")
   INNStartDate                        DateTime?
-  KPP                                 Int?
+  KPP                                 String    @default("")
   OKOPF                               String    @default("")
   OKFS                                String    @default("")
   licenseRegNumber                    Int?
@@ -60,7 +60,7 @@ model School {
   numOfSixthGrades                    Int?
   numOfSeventhGrades                  Int?
   numOfEighthGrades                   Int?
-  numOfNenethGrades                   Int?
+  numOfNinethGrades                   Int?
   hasSecondarySchoolEducationLevel    Boolean   @default(true)
   numOfSecondarySchoolLevelPupils     Int?
   numOfTenthGrades                    Int?
@@ -101,6 +101,8 @@ model Teacher {
   worksSinceDate          DateTime?
   trainings               String    @default("")
   additionalInfo          String    @default("")
+  experience              String    @default("")
+  updateDate              DateTime? @default(now())
   from_School_director    School[]  @relation("School_director")
   from_User_teacherRef    User[]    @relation("User_teacherRef")
 }

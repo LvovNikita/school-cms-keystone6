@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn keystone dev",
-    "init-data": "keystone --init-data"
+    "init-data": "keystone --init-data",
+    "deploy": "",
+    "dev": "",
+    "postinstall": ""
   },
   "dependencies": {
     "@keystone-6/auth": "^4.0.0",

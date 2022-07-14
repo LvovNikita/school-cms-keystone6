@@ -2,27 +2,16 @@ import { KeystoneContext } from '@keystone-6/core/types'
 import { mainMenuItems } from './mainMenuItems'
 import { menuItems } from './menuItems'
 
+const createDBItem = async (item, collection) => {
+    await collection.createOne({
+        data: item,
+        query: 'id'
+    })
+}
+
 export async function initData (context: KeystoneContext) {
-    const createMainMenuItem = async (menuItemData) => {
-        await context.query.MainMenuItem.createOne({
-            data: menuItemData,
-            query: 'id'
-        })
-    }
-
-    const createMenuItems = async (menuItemData, id?) => {
-        await context.query.MenuItem.createOne({
-            data: menuItemData,
-            query: 'id'
-        })
-    }
-
-    for (const menuItem of menuItems) {
-        await createMenuItems(menuItem)
-    }
-
-    await createMainMenuItem(mainMenuItems[0])
-
+    await createDBItem(mainMenuItems[0], context.query.MainMenuItem)
+    for (const menuItem of menuItems) { await createDBItem(menuItem, context.query.MenuItem) }
     console.log('Done!')
     process.exit()
 }

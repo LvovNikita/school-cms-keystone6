@@ -12,7 +12,9 @@ interface blockListOptions {
 const opts: blockListOptions = {
     title: {
         label: 'Название блока',
-        validation: { isRequired: true }
+        validation: {
+            isRequired: true
+        }
     },
     content: {
         ...wysiwygOptions

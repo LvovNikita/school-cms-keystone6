@@ -1,6 +1,8 @@
 
 import { integer, text, relationship } from '@keystone-6/core/fields'
 
+const slugValidation = require('../util/fieldsValidation/slugValidation')
+
 interface menuItemListOptions {
     title,
     weight,
@@ -23,7 +25,8 @@ const opts: menuItemListOptions = {
     slug: {
         label: 'Путь в URL-адресе (path, slug)',
         validation: {
-            isRequired: true
+            isRequired: true,
+            ...slugValidation.validation
         },
         isIndexed: 'unique'
     },

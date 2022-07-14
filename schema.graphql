@@ -12,10 +12,10 @@ type School {
   phone: String
   fax: String
   schedule: String
-  OGRN: Int
-  INN: Int
+  OGRN: String
+  INN: String
   INNStartDate: DateTime
-  KPP: Int
+  KPP: String
   OKOPF: String
   OKFS: String
   licenseRegNumber: Int
@@ -48,7 +48,7 @@ type School {
   numOfSixthGrades: Int
   numOfSeventhGrades: Int
   numOfEighthGrades: Int
-  numOfNenethGrades: Int
+  numOfNinethGrades: Int
   hasSecondarySchoolEducationLevel: Boolean
   numOfSecondarySchoolLevelPupils: Int
   numOfTenthGrades: Int
@@ -76,10 +76,10 @@ input SchoolWhereInput {
   phone: StringFilter
   fax: StringFilter
   schedule: StringFilter
-  OGRN: IntNullableFilter
-  INN: IntNullableFilter
+  OGRN: StringFilter
+  INN: StringFilter
   INNStartDate: DateTimeNullableFilter
-  KPP: IntNullableFilter
+  KPP: StringFilter
   OKOPF: StringFilter
   OKFS: StringFilter
   licenseRegNumber: IntNullableFilter
@@ -112,7 +112,7 @@ input SchoolWhereInput {
   numOfSixthGrades: IntNullableFilter
   numOfSeventhGrades: IntNullableFilter
   numOfEighthGrades: IntNullableFilter
-  numOfNenethGrades: IntNullableFilter
+  numOfNinethGrades: IntNullableFilter
   hasSecondarySchoolEducationLevel: BooleanFilter
   numOfSecondarySchoolLevelPupils: IntNullableFilter
   numOfTenthGrades: IntNullableFilter
@@ -158,17 +158,6 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input IntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: IntNullableFilter
-}
-
 input DateTimeNullableFilter {
   equals: DateTime
   in: [DateTime!]
@@ -178,6 +167,17 @@ input DateTimeNullableFilter {
   gt: DateTime
   gte: DateTime
   not: DateTimeNullableFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
 }
 
 input BooleanFilter {
@@ -231,7 +231,7 @@ input SchoolOrderByInput {
   numOfSixthGrades: OrderDirection
   numOfSeventhGrades: OrderDirection
   numOfEighthGrades: OrderDirection
-  numOfNenethGrades: OrderDirection
+  numOfNinethGrades: OrderDirection
   hasSecondarySchoolEducationLevel: OrderDirection
   numOfSecondarySchoolLevelPupils: OrderDirection
   numOfTenthGrades: OrderDirection
@@ -253,10 +253,10 @@ input SchoolUpdateInput {
   phone: String
   fax: String
   schedule: String
-  OGRN: Int
-  INN: Int
+  OGRN: String
+  INN: String
   INNStartDate: DateTime
-  KPP: Int
+  KPP: String
   OKOPF: String
   OKFS: String
   licenseRegNumber: Int
@@ -289,7 +289,7 @@ input SchoolUpdateInput {
   numOfSixthGrades: Int
   numOfSeventhGrades: Int
   numOfEighthGrades: Int
-  numOfNenethGrades: Int
+  numOfNinethGrades: Int
   hasSecondarySchoolEducationLevel: Boolean
   numOfSecondarySchoolLevelPupils: Int
   numOfTenthGrades: Int
@@ -317,10 +317,10 @@ input SchoolCreateInput {
   phone: String
   fax: String
   schedule: String
-  OGRN: Int
-  INN: Int
+  OGRN: String
+  INN: String
   INNStartDate: DateTime
-  KPP: Int
+  KPP: String
   OKOPF: String
   OKFS: String
   licenseRegNumber: Int
@@ -353,7 +353,7 @@ input SchoolCreateInput {
   numOfSixthGrades: Int
   numOfSeventhGrades: Int
   numOfEighthGrades: Int
-  numOfNenethGrades: Int
+  numOfNinethGrades: Int
   hasSecondarySchoolEducationLevel: Boolean
   numOfSecondarySchoolLevelPupils: Int
   numOfTenthGrades: Int
@@ -442,6 +442,8 @@ type Teacher {
   worksSinceDate: DateTime
   trainings: String
   additionalInfo: String
+  experience: String
+  updateDate: DateTime
 }
 
 enum TeacherPositionType {
@@ -502,6 +504,8 @@ input TeacherWhereInput {
   worksSinceDate: DateTimeNullableFilter
   trainings: StringFilter
   additionalInfo: StringFilter
+  experience: StringFilter
+  updateDate: DateTimeNullableFilter
 }
 
 input TeacherPositionTypeNullableFilter {
@@ -559,6 +563,8 @@ input TeacherOrderByInput {
   worksSinceDate: OrderDirection
   trainings: OrderDirection
   additionalInfo: OrderDirection
+  experience: OrderDirection
+  updateDate: OrderDirection
 }
 
 input TeacherUpdateInput {
@@ -580,6 +586,8 @@ input TeacherUpdateInput {
   worksSinceDate: DateTime
   trainings: String
   additionalInfo: String
+  experience: String
+  updateDate: DateTime
 }
 
 input TeacherUpdateArgs {
@@ -606,6 +614,8 @@ input TeacherCreateInput {
   worksSinceDate: DateTime
   trainings: String
   additionalInfo: String
+  experience: String
+  updateDate: DateTime
 }
 
 type MainMenuItem {
