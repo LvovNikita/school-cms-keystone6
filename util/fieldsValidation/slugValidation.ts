@@ -1,4 +1,4 @@
-export const sligValidation = {
+export const slugValidation = {
     validation: {
         match: {
             regex: /$^|^[\w|-]+$/,

@@ -1,9 +1,11 @@
 import { image, relationship, text } from '@keystone-6/core/fields'
+import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
-module.exports = {
+export const photoModel = {
     fields: {
         title: text({
-            label: 'Название'
+            label: 'Название',
+            ...required
         }),
         description: text({
             label: 'Описание'
@@ -13,7 +15,7 @@ module.exports = {
             storage: 'localImages'
         }),
         albumRef: relationship({
-            label: 'Альбомы, в которых будет размещена фотография',
+            label: 'Альбомы с фотографией:',
             ref: 'Album.photoRef',
             many: true
         })

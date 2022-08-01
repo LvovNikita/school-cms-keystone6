@@ -1,29 +1,16 @@
 import { text } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
 import { wysiwygOptions } from '../util/fieldsOptions/wysiwygOptions'
+import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
 const wysiwyg = document
 
-interface blockListOptions {
-    title,
-    content
-}
-
-const opts: blockListOptions = {
-    title: {
-        label: 'Название блока',
-        validation: {
-            isRequired: true
-        }
-    },
-    content: {
-        ...wysiwygOptions
-    }
-}
-
-module.exports = {
+export const blockModel = {
     fields: {
-        title: text(opts.title),
-        content: wysiwyg(opts.content)
+        title: text({
+            label: 'Название блока',
+            ...required
+        }),
+        content: wysiwyg(wysiwygOptions)
     }
 }

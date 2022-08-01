@@ -1,9 +1,11 @@
 import { text, relationship } from '@keystone-6/core/fields'
+import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
-module.exports = {
+export const albumModel = {
     fields: {
         title: text({
-            label: 'Название'
+            label: 'Название',
+            ...required
         }),
         description: text({
             label: 'Описание'

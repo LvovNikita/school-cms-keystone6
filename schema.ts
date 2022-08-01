@@ -1,18 +1,19 @@
 import { list } from '@keystone-6/core'
 
+import { albumModel } from './models/Album'
+import { bannerModel } from './models/Banner'
+import { blockModel } from './models/Block'
+import { fileModel } from './models/File'
+import { newsPostModel } from './models/NewsPost'
+import { pageModel } from './models/Page'
+import { photoModel } from './models/Photo'
+import { subjectModel } from './models/Subject'
+import { menuItemModel } from './models/MenuItem'
+import { mainMenuItemModel } from './models/MainMenuItem'
+import { teacherModel } from './models/Teacher'
+import { userModel } from './models/User'
+
 const schoolModel = require('./models/School')
-const userModel = require('./models/User')
-const teacherModel = require('./models/Teacher')
-const mainMenuItemModel = require('./models/MainMenuItem')
-const menuItemModel = require('./models/MenuItem')
-const pageModel = require('./models/Page')
-const blockModel = require('./models/Block')
-const newsPostModel = require('./models/NewsPost')
-const subjectModel = require('./models/Subject')
-const fileModel = require('./models/File')
-const bannerModel = require('./models/Banner')
-const albumModel = require('./models/Album')
-const photoModel = require('./models/Photo')
 
 export const lists = {
     School: list(schoolModel),

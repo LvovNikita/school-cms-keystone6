@@ -1,34 +1,21 @@
 import { relationship, text } from '@keystone-6/core/fields'
+import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
-interface pageListOptions {
-    title,
-    menuItemRef,
-    blocks,
-}
-
-const opts: pageListOptions = {
-    title: {
-        label: 'Заголовок страницы',
-        validation: {
-            isRequired: true
-        }
-    },
-    menuItemRef: {
-        label: 'Переход на страницу через пункт меню:',
-        ref: 'MenuItem.pageRef',
-        many: false
-    },
-    blocks: {
-        label: 'Блоки, составляющие страницу',
-        ref: 'Block',
-        many: true
-    }
-}
-
-module.exports = {
+export const pageModel = {
     fields: {
-        title: text(opts.title),
-        menuItemRef: relationship(opts.menuItemRef),
-        blocks: relationship(opts.blocks)
+        title: text({
+            label: 'Заголовок страницы',
+            ...required
+        }),
+        menuItemRef: relationship({
+            label: 'Переход на страницу через пункт меню:',
+            ref: 'MenuItem.pageRef',
+            many: false
+        }),
+        blocks: relationship({
+            label: 'Блоки, составляющие страницу:',
+            ref: 'Block',
+            many: true
+        })
     }
 }

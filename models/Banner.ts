@@ -1,6 +1,6 @@
 import { text, image } from '@keystone-6/core/fields'
 
-module.exports = {
+export const bannerModel = {
     fields: {
         title: text({
             label: 'Название'
