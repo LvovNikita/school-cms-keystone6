@@ -1,7 +1,8 @@
 import { config } from '@keystone-6/core'
 import { withAuth, session } from './auth/auth'
 import { db } from './config/db'
-import { lists } from './schema'
+const lists = require('./schema')
+const { localFiles, localImages } = require('./config/storage')
 
 export default config(
     withAuth({
@@ -10,6 +11,10 @@ export default config(
         session,
         ui: {
             isAccessAllowed: (ctx) => !!ctx.session?.data
+        },
+        storage: {
+            localFiles,
+            localImages
         }
     })
 )
