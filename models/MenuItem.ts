@@ -7,9 +7,7 @@ export const menuItemModel = {
     fields: {
         title: text({
             label: 'Название',
-            validation: {
-                isRequired: true
-            }
+            ...required
         }),
         weight: integer({
             label: 'Вес (чем меньше, тем ближе к началу)',

@@ -1,9 +1,11 @@
 import { text, image } from '@keystone-6/core/fields'
+import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
 export const bannerModel = {
     fields: {
         title: text({
-            label: 'Название'
+            label: 'Название',
+            ...required
         }),
         href: text({
             label: 'Ссылка для перехода'
