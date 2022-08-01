@@ -11,7 +11,9 @@ const createDBItem = async (item, collection) => {
 
 export async function initData (context: KeystoneContext) {
     await createDBItem(mainMenuItems[0], context.query.MainMenuItem)
-    for (const menuItem of menuItems) { await createDBItem(menuItem, context.query.MenuItem) }
+    for (const menuItem of menuItems) {
+        await createDBItem(menuItem, context.query.MenuItem)
+    }
     console.log('Done!')
     process.exit()
 }

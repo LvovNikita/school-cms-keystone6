@@ -1,4 +1,4 @@
-import { text, timestamp } from '@keystone-6/core/fields'
+import { text, timestamp, relationship } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
 import { wysiwygOptions } from '../util/fieldsOptions/wysiwygOptions'
 import { required } from '../util/fieldsOptions/kesytoneShorthands'
@@ -20,7 +20,11 @@ export const newsPostModel = {
             defaultValue: {
                 kind: 'now'
             }
+        }),
+        tagRef: relationship({
+            label: 'Теги:',
+            ref: 'Tag.newsPostRef',
+            many: true
         })
-        // tags: relationship
     }
 }

@@ -9,7 +9,7 @@ import { kppValidation } from '../util/fieldsValidation/kppValidation'
 import { okopfValidation } from '../util/fieldsValidation/okopfValidation'
 import { okfsValidation } from '../util/fieldsValidation/okfsValidation'
 
-module.exports = {
+export const schoolModel = {
     fields: {
         schoolName: text({
             label: 'Полное наименование образовательной организации',
@@ -42,11 +42,11 @@ module.exports = {
             label: 'Факс ОО',
             ...phoneValidation
         }),
-        schedule: text({ 
-            label: 'Режим и график работы ОО', 
-            ui: { 
-                displayMode: 'textarea' 
-            } 
+        schedule: text({
+            label: 'Режим и график работы ОО',
+            ui: {
+                displayMode: 'textarea'
+            }
         }),
         OGRN: text({
             label: 'ОГРН',

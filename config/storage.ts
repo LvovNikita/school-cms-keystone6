@@ -7,7 +7,8 @@ export const localFiles: StorageConfig = {
     serverRoute: {
         path: '/files'
     },
-    storagePath: 'public/files'
+    storagePath: 'public/files',
+    preserve: false
 }
 
 export const localImages: StorageConfig = {
@@ -17,5 +18,6 @@ export const localImages: StorageConfig = {
     serverRoute: {
         path: '/images'
     },
-    storagePath: 'public/images'
+    storagePath: 'public/images',
+    preserve: false
 }

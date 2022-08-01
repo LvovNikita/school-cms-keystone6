@@ -12,6 +12,88 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
+model Album {
+  id          String  @id @default(cuid())
+  title       String  @default("")
+  description String  @default("")
+  photoRef    Photo[] @relation("Album_photoRef")
+}
+
+model Banner {
+  id             String  @id @default(cuid())
+  title          String  @default("")
+  href           String  @default("")
+  file_filesize  Int?
+  file_extension String?
+  file_width     Int?
+  file_height    Int?
+  file_id        String?
+}
+
+model Block {
+  id               String @id @default(cuid())
+  title            String @default("")
+  content          String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  from_Page_blocks Page[] @relation("Page_blocks")
+}
+
+model File {
+  id            String  @id @default(cuid())
+  filename      String  @default("")
+  description   String  @default("")
+  file_filesize Int?
+  file_filename String?
+  tagRef        Tag[]   @relation("File_tagRef")
+}
+
+model MainMenuItem {
+  id          String     @id @default(cuid())
+  title       String     @default("")
+  weight      Int?       @default(999)
+  subItemsRef MenuItem[] @relation("MenuItem_mainMenuRef")
+}
+
+model MenuItem {
+  id            String        @id @default(cuid())
+  title         String        @default("")
+  weight        Int?          @default(999)
+  slug          String        @unique @default("")
+  mainMenuRef   MainMenuItem? @relation("MenuItem_mainMenuRef", fields: [mainMenuRefId], references: [id])
+  mainMenuRefId String?       @map("mainMenuRef")
+  pageRef       Page?         @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
+  pageRefId     String?       @unique @map("pageRef")
+
+  @@index([mainMenuRefId])
+}
+
+model NewsPost {
+  id              String    @id @default(cuid())
+  title           String    @default("")
+  content         String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  publicationDate DateTime? @default(now())
+  tagRef          Tag[]     @relation("NewsPost_tagRef")
+}
+
+model Page {
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  menuItemRef MenuItem? @relation("MenuItem_pageRef")
+  blocks      Block[]   @relation("Page_blocks")
+}
+
+model Photo {
+  id              String  @id @default(cuid())
+  title           String  @default("")
+  description     String  @default("")
+  photo_filesize  Int?
+  photo_extension String?
+  photo_width     Int?
+  photo_height    Int?
+  photo_id        String?
+  albumRef        Album[] @relation("Album_photoRef")
+  tagRef          Tag[]   @relation("Photo_tagRef")
+}
+
 model School {
   id                                  String    @id @default(cuid())
   schoolName                          String    @default("")
@@ -69,16 +151,18 @@ model School {
   @@index([directorId])
 }
 
-model User {
-  id           String   @id @default(cuid())
-  username     String   @default("")
-  password     String
-  email        String   @unique @default("")
-  teacherRef   Teacher? @relation("User_teacherRef", fields: [teacherRefId], references: [id])
-  teacherRefId String?  @map("teacherRef")
-  isAdmin      Boolean  @default(false)
+model Subject {
+  id         String    @id @default(cuid())
+  title      String    @default("")
+  teacherRef Teacher[] @relation("Subject_teacherRef")
+}
 
-  @@index([teacherRefId])
+model Tag {
+  id          String     @id @default(cuid())
+  tag         String     @default("")
+  photoRef    Photo[]    @relation("Photo_tagRef")
+  fileRef     File[]     @relation("File_tagRef")
+  newsPostRef NewsPost[] @relation("NewsPost_tagRef")
 }
 
 model Teacher {
@@ -104,91 +188,18 @@ model Teacher {
   experience              String    @default("")
   updateDate              DateTime? @default(now())
   from_School_director    School[]  @relation("School_director")
-  from_User_teacherRef    User[]    @relation("User_teacherRef")
   from_Subject_teacherRef Subject[] @relation("Subject_teacherRef")
+  from_User_teacherRef    User[]    @relation("User_teacherRef")
 }
 
-model MainMenuItem {
-  id          String     @id @default(cuid())
-  title       String     @default("")
-  weight      Int?       @default(999)
-  subItemsRef MenuItem[] @relation("MenuItem_mainMenuRef")
-}
+model User {
+  id           String   @id @default(cuid())
+  username     String   @default("")
+  password     String
+  email        String   @unique @default("")
+  teacherRef   Teacher? @relation("User_teacherRef", fields: [teacherRefId], references: [id])
+  teacherRefId String?  @map("teacherRef")
+  isAdmin      Boolean  @default(false)
 
-model MenuItem {
-  id            String        @id @default(cuid())
-  title         String        @default("")
-  weight        Int?          @default(999)
-  slug          String        @unique @default("")
-  mainMenuRef   MainMenuItem? @relation("MenuItem_mainMenuRef", fields: [mainMenuRefId], references: [id])
-  mainMenuRefId String?       @map("mainMenuRef")
-  pageRef       Page?         @relation("MenuItem_pageRef", fields: [pageRefId], references: [id])
-  pageRefId     String?       @unique @map("pageRef")
-
-  @@index([mainMenuRefId])
-}
-
-model Page {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  menuItemRef MenuItem? @relation("MenuItem_pageRef")
-  blocks      Block[]   @relation("Page_blocks")
-}
-
-model Block {
-  id               String @id @default(cuid())
-  title            String @default("")
-  content          String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  from_Page_blocks Page[] @relation("Page_blocks")
-}
-
-model NewsPost {
-  id              String    @id @default(cuid())
-  title           String    @default("")
-  content         String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publicationDate DateTime? @default(now())
-}
-
-model Subject {
-  id         String    @id @default(cuid())
-  title      String    @default("")
-  teacherRef Teacher[] @relation("Subject_teacherRef")
-}
-
-model File {
-  id            String  @id @default(cuid())
-  filename      String  @default("")
-  description   String  @default("")
-  file_filesize Int?
-  file_filename String?
-}
-
-model Banner {
-  id             String  @id @default(cuid())
-  title          String  @default("")
-  href           String  @default("")
-  file_filesize  Int?
-  file_extension String?
-  file_width     Int?
-  file_height    Int?
-  file_id        String?
-}
-
-model Album {
-  id          String  @id @default(cuid())
-  title       String  @default("")
-  description String  @default("")
-  photoRef    Photo[] @relation("Album_photoRef")
-}
-
-model Photo {
-  id              String  @id @default(cuid())
-  title           String  @default("")
-  description     String  @default("")
-  photo_filesize  Int?
-  photo_extension String?
-  photo_width     Int?
-  photo_height    Int?
-  photo_id        String?
-  albumRef        Album[] @relation("Album_photoRef")
+  @@index([teacherRefId])
 }

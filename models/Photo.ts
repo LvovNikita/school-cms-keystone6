@@ -18,7 +18,11 @@ export const photoModel = {
             label: 'Альбомы с фотографией:',
             ref: 'Album.photoRef',
             many: true
+        }),
+        tagRef: relationship({
+            label: 'Теги:',
+            ref: 'Tag.photoRef',
+            many: true
         })
-        // tag: null
     }
 }

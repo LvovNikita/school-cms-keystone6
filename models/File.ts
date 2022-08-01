@@ -1,4 +1,4 @@
-import { file, text } from '@keystone-6/core/fields'
+import { file, text, relationship } from '@keystone-6/core/fields'
 import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
 export const fileModel = {
@@ -13,6 +13,11 @@ export const fileModel = {
         file: file({
             label: 'Файл',
             storage: 'localFiles'
+        }),
+        tagRef: relationship({
+            label: 'Теги:',
+            ref: 'Tag.fileRef',
+            many: true
         })
     }
 }

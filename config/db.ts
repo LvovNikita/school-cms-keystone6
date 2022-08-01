@@ -8,5 +8,10 @@ export const db: DatabaseConfig<BaseKeystoneTypeInfo> = {
         if (process.argv.includes('--init-data')) {
             await initData(context)
         }
+    },
+    enableLogging: true,
+    useMigrations: false,
+    idField: {
+        kind: 'cuid'
     }
 }
