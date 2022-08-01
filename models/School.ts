@@ -211,5 +211,9 @@ export const schoolModel = {
             label: 'Количество одиннадцатых классов',
             ...nonNegative
         })
+    },
+    ui: {
+        label: 'Общие сведения',
+        description: 'В этом разделе можно указать общие сведения об ОО'
     }
 }

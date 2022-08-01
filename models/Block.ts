@@ -12,5 +12,9 @@ export const blockModel = {
             ...required
         }),
         content: wysiwyg(wysiwygOptions)
+    },
+    ui: {
+        label: 'Блоки страниц',
+        description: 'В этом разделе можно создать блок (составная часть страницы)'
     }
 }

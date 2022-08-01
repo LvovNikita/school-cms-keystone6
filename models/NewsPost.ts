@@ -26,5 +26,9 @@ export const newsPostModel = {
             ref: 'Tag.newsPostRef',
             many: true
         })
+    },
+    ui: {
+        label: 'Новости',
+        description: 'В этом разделе можно создать новостной пост'
     }
 }

@@ -19,5 +19,9 @@ export const fileModel = {
             ref: 'Tag.fileRef',
             many: true
         })
+    },
+    ui: {
+        label: 'Файлы',
+        description: 'В этом разделе можно добавить файла'
     }
 }

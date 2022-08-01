@@ -16,5 +16,9 @@ export const mainMenuItemModel = {
             ref: 'MenuItem.mainMenuRef',
             many: true
         })
+    },
+    ui: {
+        label: 'Главное меню',
+        description: 'В этом разделе можно создать пункт главного меню. Создать дочерние элементы можно в разделе MenuItem'
     }
 }

@@ -24,5 +24,9 @@ export const photoModel = {
             ref: 'Tag.photoRef',
             many: true
         })
+    },
+    ui: {
+        label: 'Фотографии',
+        description: 'В этом разделе можно добавить фотографии'
     }
 }

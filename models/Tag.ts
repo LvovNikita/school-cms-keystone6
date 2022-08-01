@@ -20,5 +20,9 @@ export const tagModel = {
             ref: 'NewsPost.tagRef',
             many: true
         })
+    },
+    ui: {
+        label: 'Теги',
+        description: 'В этом разделе можно добавить теги для упрощения поиска по фотографиям, файлам и новостям'
     }
 }

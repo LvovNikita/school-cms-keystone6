@@ -40,5 +40,10 @@ export const userModel = {
             label: 'Является администратором',
             defaultValue: false
         })
+    },
+    ui: {
+        label: 'Пользователи',
+        description: 'В этом разделе можно управлять пользователями'
     }
+
 }

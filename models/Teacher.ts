@@ -97,5 +97,9 @@ export const teacherModel = {
                 kind: 'now'
             }
         })
+    },
+    ui: {
+        label: 'Учителя',
+        description: 'В этом разделе можно добавить учителей. Добавить предметы можно в разделе Subject'
     }
 }

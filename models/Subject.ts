@@ -12,5 +12,9 @@ export const subjectModel = {
             ref: 'Teacher',
             many: true
         })
+    },
+    ui: {
+        label: 'Предметы',
+        description: 'В этом разделе можно добавить учебные предметы'
     }
 }

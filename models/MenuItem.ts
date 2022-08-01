@@ -31,5 +31,9 @@ export const menuItemModel = {
             ref: 'Page.menuItemRef',
             many: false
         })
+    },
+    ui: {
+        label: 'Пункты меню',
+        description: 'В этом разделе можно создать дочерние элементы пунктов главного меню. Создать пункты главного меню можно в разделе MainMenuItem'
     }
 }

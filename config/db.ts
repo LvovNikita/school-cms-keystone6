@@ -9,7 +9,7 @@ export const db: DatabaseConfig<BaseKeystoneTypeInfo> = {
             await initData(context)
         }
     },
-    enableLogging: true,
+    enableLogging: false,
     useMigrations: false,
     idField: {
         kind: 'cuid'

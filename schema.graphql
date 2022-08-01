@@ -23,9 +23,6 @@ input AlbumWhereInput {
   OR: [AlbumWhereInput!]
   NOT: [AlbumWhereInput!]
   id: IDFilter
-  title: StringFilter
-  description: StringFilter
-  photoRef: PhotoManyRelationFilter
 }
 
 input IDFilter {
@@ -39,44 +36,8 @@ input IDFilter {
   not: IDFilter
 }
 
-input StringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
-}
-
-input NestedStringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
-}
-
-input PhotoManyRelationFilter {
-  every: PhotoWhereInput
-  some: PhotoWhereInput
-  none: PhotoWhereInput
-}
-
 input AlbumOrderByInput {
   id: OrderDirection
-  title: OrderDirection
-  description: OrderDirection
 }
 
 enum OrderDirection {
@@ -147,6 +108,34 @@ input BannerWhereInput {
   id: IDFilter
   title: StringFilter
   href: StringFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
 }
 
 input BannerOrderByInput {
@@ -1086,6 +1075,12 @@ input TagWhereInput {
   photoRef: PhotoManyRelationFilter
   fileRef: FileManyRelationFilter
   newsPostRef: NewsPostManyRelationFilter
+}
+
+input PhotoManyRelationFilter {
+  every: PhotoWhereInput
+  some: PhotoWhereInput
+  none: PhotoWhereInput
 }
 
 input FileManyRelationFilter {

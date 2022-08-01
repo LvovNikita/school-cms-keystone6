@@ -1,7 +1,9 @@
+import { ListConfig } from '@keystone-6/core'
 import { text, relationship } from '@keystone-6/core/fields'
+import { BaseListTypeInfo } from '@keystone-6/core/types'
 import { required } from '../util/fieldsOptions/kesytoneShorthands'
 
-export const albumModel = {
+export const albumModel: ListConfig<BaseListTypeInfo, any> = {
     fields: {
         title: text({
             label: 'Название',
@@ -15,5 +17,15 @@ export const albumModel = {
             ref: 'Photo.albumRef',
             many: true
         })
-    }
+    },
+    access: {},
+    ui: {
+        label: 'Альбомы',
+        description: 'В этом разделе можно создать альбом для фотографий',
+    },
+    hooks: {},
+    graphql: {},
+    db: {},
+    defaultIsFilterable: false,
+    defaultIsOrderable: false
 }

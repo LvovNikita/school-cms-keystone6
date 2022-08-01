@@ -17,5 +17,9 @@ export const pageModel = {
             ref: 'Block',
             many: true
         })
+    },
+    ui: {
+        label: 'Страницы',
+        description: 'В этом разделе можно создать страницу. Страница состоит из блоков, которые можно создать в разделе Block'
     }
 }
