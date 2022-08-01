@@ -9,7 +9,8 @@ module.exports = {
             label: 'Описание'
         }),
         file: file({
-            storage: 'local_files'
+            label: 'Файл',
+            storage: 'localFiles'
         })
     }
 }

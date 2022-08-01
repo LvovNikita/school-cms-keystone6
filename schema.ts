@@ -9,6 +9,7 @@ const blockModel = require('./models/Block')
 const newsPostModel = require('./models/NewsPost')
 const subjectModel = require('./models/Subject')
 const fileModel = require('./models/File')
+const bannerModel = require('./models/Banner')
 
 module.exports = {
     School: list(schoolModel),
@@ -19,5 +20,6 @@ module.exports = {
     Block: list(blockModel),
     NewsPost: list(newsPostModel),
     Subject: list(subjectModel),
-    File: list(fileModel)
+    File: list(fileModel),
+    Banner: list(bannerModel)
 }
