@@ -14,7 +14,7 @@ const bannerModel = require('./models/Banner')
 const albumModel = require('./models/Album')
 const photoModel = require('./models/Photo')
 
-module.exports = {
+export const lists = {
     School: list(schoolModel),
     User: list(userModel),
     Teacher: list(teacherModel),

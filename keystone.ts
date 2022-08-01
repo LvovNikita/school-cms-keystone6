@@ -1,8 +1,8 @@
 import { config } from '@keystone-6/core'
 import { withAuth, session } from './auth/auth'
 import { db } from './config/db'
-const lists = require('./schema')
-const { localFiles, localImages } = require('./config/storage')
+import { lists } from './schema'
+import { localFiles, localImages } from './config/storage'
 
 export default config(
     withAuth({
