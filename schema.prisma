@@ -156,9 +156,29 @@ model File {
 model Banner {
   id             String  @id @default(cuid())
   title          String  @default("")
+  href           String  @default("")
   file_filesize  Int?
   file_extension String?
   file_width     Int?
   file_height    Int?
   file_id        String?
+}
+
+model Album {
+  id          String  @id @default(cuid())
+  title       String  @default("")
+  description String  @default("")
+  photoRef    Photo[] @relation("Album_photoRef")
+}
+
+model Photo {
+  id              String  @id @default(cuid())
+  title           String  @default("")
+  description     String  @default("")
+  photo_filesize  Int?
+  photo_extension String?
+  photo_width     Int?
+  photo_height    Int?
+  photo_id        String?
+  albumRef        Album[] @relation("Album_photoRef")
 }

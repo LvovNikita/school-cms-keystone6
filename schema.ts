@@ -10,6 +10,8 @@ const newsPostModel = require('./models/NewsPost')
 const subjectModel = require('./models/Subject')
 const fileModel = require('./models/File')
 const bannerModel = require('./models/Banner')
+const albumModel = require('./models/Album')
+const photoModel = require('./models/Photo')
 
 module.exports = {
     School: list(schoolModel),
@@ -21,5 +23,7 @@ module.exports = {
     NewsPost: list(newsPostModel),
     Subject: list(subjectModel),
     File: list(fileModel),
-    Banner: list(bannerModel)
+    Banner: list(bannerModel),
+    Album: list(albumModel),
+    Photo: list(photoModel)
 }

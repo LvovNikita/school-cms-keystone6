@@ -992,6 +992,7 @@ input FileCreateInput {
 type Banner {
   id: ID!
   title: String
+  href: String
   file: ImageFieldOutput
 }
 
@@ -1021,15 +1022,18 @@ input BannerWhereInput {
   NOT: [BannerWhereInput!]
   id: IDFilter
   title: StringFilter
+  href: StringFilter
 }
 
 input BannerOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  href: OrderDirection
 }
 
 input BannerUpdateInput {
   title: String
+  href: String
   file: ImageFieldInput
 }
 
@@ -1044,7 +1048,147 @@ input BannerUpdateArgs {
 
 input BannerCreateInput {
   title: String
+  href: String
   file: ImageFieldInput
+}
+
+type Album {
+  id: ID!
+  title: String
+  description: String
+  photoRef(
+    where: PhotoWhereInput! = {}
+    orderBy: [PhotoOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Photo!]
+  photoRefCount(where: PhotoWhereInput! = {}): Int
+}
+
+input AlbumWhereUniqueInput {
+  id: ID
+}
+
+input AlbumWhereInput {
+  AND: [AlbumWhereInput!]
+  OR: [AlbumWhereInput!]
+  NOT: [AlbumWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  photoRef: PhotoManyRelationFilter
+}
+
+input PhotoManyRelationFilter {
+  every: PhotoWhereInput
+  some: PhotoWhereInput
+  none: PhotoWhereInput
+}
+
+input AlbumOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+}
+
+input AlbumUpdateInput {
+  title: String
+  description: String
+  photoRef: PhotoRelateToManyForUpdateInput
+}
+
+input PhotoRelateToManyForUpdateInput {
+  disconnect: [PhotoWhereUniqueInput!]
+  set: [PhotoWhereUniqueInput!]
+  create: [PhotoCreateInput!]
+  connect: [PhotoWhereUniqueInput!]
+}
+
+input AlbumUpdateArgs {
+  where: AlbumWhereUniqueInput!
+  data: AlbumUpdateInput!
+}
+
+input AlbumCreateInput {
+  title: String
+  description: String
+  photoRef: PhotoRelateToManyForCreateInput
+}
+
+input PhotoRelateToManyForCreateInput {
+  create: [PhotoCreateInput!]
+  connect: [PhotoWhereUniqueInput!]
+}
+
+type Photo {
+  id: ID!
+  title: String
+  description: String
+  photo: ImageFieldOutput
+  albumRef(
+    where: AlbumWhereInput! = {}
+    orderBy: [AlbumOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Album!]
+  albumRefCount(where: AlbumWhereInput! = {}): Int
+}
+
+input PhotoWhereUniqueInput {
+  id: ID
+}
+
+input PhotoWhereInput {
+  AND: [PhotoWhereInput!]
+  OR: [PhotoWhereInput!]
+  NOT: [PhotoWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  albumRef: AlbumManyRelationFilter
+}
+
+input AlbumManyRelationFilter {
+  every: AlbumWhereInput
+  some: AlbumWhereInput
+  none: AlbumWhereInput
+}
+
+input PhotoOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+}
+
+input PhotoUpdateInput {
+  title: String
+  description: String
+  photo: ImageFieldInput
+  albumRef: AlbumRelateToManyForUpdateInput
+}
+
+input AlbumRelateToManyForUpdateInput {
+  disconnect: [AlbumWhereUniqueInput!]
+  set: [AlbumWhereUniqueInput!]
+  create: [AlbumCreateInput!]
+  connect: [AlbumWhereUniqueInput!]
+}
+
+input PhotoUpdateArgs {
+  where: PhotoWhereUniqueInput!
+  data: PhotoUpdateInput!
+}
+
+input PhotoCreateInput {
+  title: String
+  description: String
+  photo: ImageFieldInput
+  albumRef: AlbumRelateToManyForCreateInput
+}
+
+input AlbumRelateToManyForCreateInput {
+  create: [AlbumCreateInput!]
+  connect: [AlbumWhereUniqueInput!]
 }
 
 """
@@ -1128,6 +1272,18 @@ type Mutation {
   updateBanners(data: [BannerUpdateArgs!]!): [Banner]
   deleteBanner(where: BannerWhereUniqueInput!): Banner
   deleteBanners(where: [BannerWhereUniqueInput!]!): [Banner]
+  createAlbum(data: AlbumCreateInput!): Album
+  createAlbums(data: [AlbumCreateInput!]!): [Album]
+  updateAlbum(where: AlbumWhereUniqueInput!, data: AlbumUpdateInput!): Album
+  updateAlbums(data: [AlbumUpdateArgs!]!): [Album]
+  deleteAlbum(where: AlbumWhereUniqueInput!): Album
+  deleteAlbums(where: [AlbumWhereUniqueInput!]!): [Album]
+  createPhoto(data: PhotoCreateInput!): Photo
+  createPhotos(data: [PhotoCreateInput!]!): [Photo]
+  updatePhoto(where: PhotoWhereUniqueInput!, data: PhotoUpdateInput!): Photo
+  updatePhotos(data: [PhotoUpdateArgs!]!): [Photo]
+  deletePhoto(where: PhotoWhereUniqueInput!): Photo
+  deletePhotos(where: [PhotoWhereUniqueInput!]!): [Photo]
 }
 
 type Query {
@@ -1211,6 +1367,22 @@ type Query {
   ): [Banner!]
   banner(where: BannerWhereUniqueInput!): Banner
   bannersCount(where: BannerWhereInput! = {}): Int
+  albums(
+    where: AlbumWhereInput! = {}
+    orderBy: [AlbumOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Album!]
+  album(where: AlbumWhereUniqueInput!): Album
+  albumsCount(where: AlbumWhereInput! = {}): Int
+  photos(
+    where: PhotoWhereInput! = {}
+    orderBy: [PhotoOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Photo!]
+  photo(where: PhotoWhereUniqueInput!): Photo
+  photosCount(where: PhotoWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 
